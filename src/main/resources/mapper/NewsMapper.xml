@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsd.dao.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.hsd.model.News">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="last_modified_by" jdbcType="BIGINT" property="lastModifiedBy" />
+    <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="recommend_ind" jdbcType="INTEGER" property="recommendInd" />
+    <result column="function_code" jdbcType="VARCHAR" property="functionCode" />
+    <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
+    <result column="publish_user_id" jdbcType="BIGINT" property="publishUserId" />
+  </resultMap>
+
+    <select id="findPublishedByFunctionCode" resultMap="BaseResultMap">
+      SELECT * from tbl_news where function_code = #{functionCode} AND status = #{status} order by publish_date DESC
+    </select>
+
+    <select id="findByFunctionCode" resultMap="BaseResultMap">
+      select * from  tbl_news where function_code = #{functionCode}
+      <if test="title != null">
+        and title like concat('%',#{title},'%')
+      </if>
+    </select>
+</mapper>
