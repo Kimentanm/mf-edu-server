@@ -42,25 +42,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- 阿里云依赖 -->
-    <dependency>
-      <groupId>com.aliyun</groupId>
-      <artifactId>aliyun-java-sdk-core</artifactId>
-      <version>2.4.2</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.aliyun</groupId>
-      <artifactId>aliyun-java-sdk-sms</artifactId>
-      <version>3.0.0-rc1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.aliyun</groupId>
-      <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
     <!-- 七牛依赖 -->
     <dependency>
       <groupId>com.qiniu</groupId>
@@ -271,6 +252,13 @@
       <artifactId>jna</artifactId>
       <version>3.0.9</version>
     </dependency>
+
+    <!-- 引入socketIo的jar包 -->
+    <dependency>
+      <groupId>com.corundumstudio.socketio</groupId>
+      <artifactId>netty-socketio</artifactId>
+      <version>1.7.17</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -281,14 +269,6 @@
         <configuration>
           <includeSystemScope>true</includeSystemScope>
         </configuration>
-        <dependencies>
-
-          <!--hot reload-->
-          <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>springloaded</artifactId>-->
-          <!--</dependency>-->
-        </dependencies>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
