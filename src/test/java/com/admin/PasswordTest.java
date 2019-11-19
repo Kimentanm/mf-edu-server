@@ -1,6 +1,6 @@
 package com.admin;
 
-import com.hsd.Tester;
+import com.mf.Tester;
 import org.junit.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

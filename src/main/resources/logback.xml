@@ -22,7 +22,7 @@
         </appender>
     -->
 
-    <logger name="com.hsd" level="DEBUG"/>
+    <logger name="com.mf" level="DEBUG"/>
 
     <root level="WARN">
         <appender-ref ref="CONSOLE"/>

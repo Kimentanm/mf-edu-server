@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hsd.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.hsd.model.User">
+<mapper namespace="com.mf.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.mf.model.User">
     <!--
       WARNING - @mbg.generated
     -->
@@ -21,8 +21,8 @@
     <result column="version" jdbcType="INTEGER" property="version"/>
   </resultMap>
 
-  <resultMap id="correlationResultMap" type="com.hsd.model.User" extends="BaseResultMap">
-    <collection property="roles" ofType="com.hsd.model.Role">
+  <resultMap id="correlationResultMap" type="com.mf.model.User" extends="BaseResultMap">
+    <collection property="roles" ofType="com.mf.model.Role">
       <id column="roleId" jdbcType="BIGINT" property="id" />
       <result column="code" jdbcType="VARCHAR" property="code" />
       <result column="roleName" jdbcType="VARCHAR" property="name" />
@@ -30,9 +30,9 @@
     </collection>
   </resultMap>
 
-  <resultMap id="PageResultMap" type="com.hsd.model.User" extends="BaseResultMap">
-    <collection property="roles" ofType="com.hsd.model.Role" column="userId=id"
-                select="com.hsd.dao.RoleMapper.findRolesByUserId" >
+  <resultMap id="PageResultMap" type="com.mf.model.User" extends="BaseResultMap">
+    <collection property="roles" ofType="com.mf.model.Role" column="userId=id"
+                select="com.mf.dao.RoleMapper.findRolesByUserId" >
       <id column="id" jdbcType="BIGINT" property="id" />
       <result column="code" jdbcType="VARCHAR" property="code" />
       <result column="name" jdbcType="VARCHAR" property="name" />
