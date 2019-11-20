@@ -1,6 +1,5 @@
 package com.mf.ws;
 
-import com.alibaba.fastjson.JSON;
 import com.mf.bo.MessageBO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,16 @@ public class FaceTimeController {
 
     @MessageMapping("/sendOffer")
     public void handleSendOffer(MessageBO messageBO) {
-        messagingTemplate.convertAndSend("/topic/" + messageBO.getReceiver(), messageBO);
+        messagingTemplate.convertAndSend("/topic/sendOffer/" + messageBO.getReceiver(), messageBO);
+    }
+
+    @MessageMapping("/sendAnswer")
+    public void handleSendAnswer(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendAnswer/" + messageBO.getReceiver(), messageBO);
+    }
+
+    @MessageMapping("/sendICE")
+    public void handleSendICE(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendICE/" + messageBO.getReceiver(), messageBO);
     }
 }

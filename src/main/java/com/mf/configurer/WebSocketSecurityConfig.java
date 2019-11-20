@@ -16,7 +16,9 @@ public class WebSocketSecurityConfig extends AbstractWebSocketMessageBrokerConfi
         //全局使用的订阅前缀（客户端订阅路径上会体现出来）
 //        registry.setApplicationDestinationPrefixes("/app");
         //订阅Broker名称
-        registry.enableSimpleBroker("/topic");
+        registry.enableSimpleBroker("/topic/sendOffer/");
+        registry.enableSimpleBroker("/topic/sendAnswer/");
+        registry.enableSimpleBroker("/topic/sendICE/");
         //点对点使用的订阅前缀（客户端订阅路径上会体现出来），不设置的话，默认也是/user/
 //        registry.setUserDestinationPrefix("/user");
     }
@@ -24,6 +26,6 @@ public class WebSocketSecurityConfig extends AbstractWebSocketMessageBrokerConfi
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
-        stompEndpointRegistry.addEndpoint("/endpointChat").setAllowedOrigins("*").withSockJS();
+        stompEndpointRegistry.addEndpoint("/endpointVideo").setAllowedOrigins("*").withSockJS();
     }
 }
