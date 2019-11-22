@@ -19,7 +19,8 @@ public class FaceTimeController {
 
     @MessageMapping("/sendOffer")
     public void handleSendOffer(MessageBO messageBO) {
-        messagingTemplate.convertAndSend("/topic/sendOffer/" + messageBO.getReceiver(), messageBO);
+        String desc = "/topic/sendOffer/" + messageBO.getReceiver();
+        messagingTemplate.convertAndSend(desc, messageBO);
     }
 
     @MessageMapping("/sendAnswer")
