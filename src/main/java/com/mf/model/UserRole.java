@@ -1,15 +1,21 @@
 package com.mf.model;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Table(name = "tbl_user_role")
+@Table(name = "tbl_user_role_ref")
 public class UserRole {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "user_id")
     private Long userId;
 
     @Column(name = "role_id")
     private Long roleId;
+
+
 
     /**
      * @return user_id
