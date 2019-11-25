@@ -20,6 +20,7 @@ public class RoleController {
 
     /**
      * 新增角色
+     *
      * @param role
      * @return
      */
@@ -31,6 +32,7 @@ public class RoleController {
 
     /**
      * 删除角色
+     *
      * @param id
      * @return
      */
@@ -42,6 +44,7 @@ public class RoleController {
 
     /**
      * 更新角色
+     *
      * @param role
      * @return
      */
@@ -53,6 +56,7 @@ public class RoleController {
 
     /**
      * 获取角色详情
+     *
      * @param id
      * @return
      */
@@ -64,6 +68,7 @@ public class RoleController {
 
     /**
      * 获取角色列表
+     *
      * @param page
      * @param size
      * @return
