@@ -10,8 +10,8 @@ public class Permission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "create_by")
-    private Long createBy;
+    @Column(name = "created_by")
+    private Long createdBy;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
@@ -67,29 +67,31 @@ public class Permission {
     }
 
     /**
-     * @return create_by
+     * @return created_by
      */
     public Long getCreateBy() {
-        return createBy;
+        return createdBy;
     }
 
     /**
      * @param createBy
      */
     public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
+        this.createdBy = createBy;
     }
 
-    /**
-     * @return created_date
-     */
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
+
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    /**
-     * @param createdDate
-     */
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }

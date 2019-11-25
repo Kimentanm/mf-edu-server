@@ -10,11 +10,11 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "create_by")
-    private Long createBy;
+    @Column(name = "created_by")
+    private Long createdBy;
 
-    @Column(name = "create_date")
-    private LocalDateTime createDate;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
     @Column(name = "last_modified_by")
     private Long lastModifiedBy;
@@ -72,31 +72,49 @@ public class Teacher {
     }
 
     /**
-     * @return create_by
+     * @return created_by
      */
     public Long getCreateBy() {
-        return createBy;
+        return createdBy;
     }
 
     /**
      * @param createBy
      */
     public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
+        this.createdBy = createBy;
     }
 
-    /**
-     * @return create_date
-     */
-    public LocalDateTime getCreateDate() {
-        return createDate;
+    public Long getCreatedBy() {
+        return createdBy;
     }
 
-    /**
-     * @param createDate
-     */
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
+    public Boolean getUse() {
+        return isUse;
+    }
+
+    public void setUse(Boolean use) {
+        isUse = use;
     }
 
     /**
