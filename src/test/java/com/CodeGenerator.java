@@ -39,7 +39,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCodeByCustomModelName("tbl_student", "Student");
+        genCodeByCustomModelName("tbl_user_role_ref", "UserRoleRef");
     }
 
     /**

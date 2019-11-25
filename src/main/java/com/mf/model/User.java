@@ -65,16 +65,16 @@ public class User {
     @Transient
     private Role role;
 
-    public UserRole getUserRole() {
-        return userRole;
+    public UserRoleRef getUserRoleRef() {
+        return userRoleRef;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setUserRoleRef(UserRoleRef userRoleRef) {
+        this.userRoleRef = userRoleRef;
     }
 
     @Transient
-    private UserRole userRole;
+    private UserRoleRef userRoleRef;
 
 
     /**

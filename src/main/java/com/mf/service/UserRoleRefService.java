@@ -1,11 +1,15 @@
 package com.mf.service;
 
 import com.mf.core.Service;
-import com.mf.model.UserRole;
+import com.mf.model.UserRoleRef;
 
 import java.util.List;
 
-public interface UserRoleService extends Service<UserRole> {
+/**
+ * Created by CodeGenerator on 2019/11/25.
+ */
+public interface UserRoleRefService extends Service<UserRoleRef> {
+
 
     int deleteByUserId(Long userId);
 

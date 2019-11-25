@@ -1,12 +1,11 @@
 package com.mf.dao;
 
 import com.mf.core.Mapper;
-import com.mf.model.UserRole;
+import com.mf.model.UserRoleRef;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface UserRoleMapper extends Mapper<UserRole> {
-
+public interface UserRoleRefMapper extends Mapper<UserRoleRef> {
     void save(@Param("userId") Long userId, @Param("roleIds") List<Long> roleIds);
 }

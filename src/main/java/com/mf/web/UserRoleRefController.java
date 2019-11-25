@@ -1,51 +1,56 @@
 package com.mf.web;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.mf.core.Result;
 import com.mf.core.ResultGenerator;
-import com.mf.model.UserRole;
-import com.mf.service.UserRoleService;
-import org.springframework.validation.annotation.Validated;
+
+import com.mf.model.UserRoleRef;
+import com.mf.service.UserRoleRefService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * Created by CodeGenerator on 2019/11/25.
+ */
 @RestController
-@RequestMapping("/user/role")
-public class UserRoleController {
+@RequestMapping("/user/role/ref")
+public class UserRoleRefController {
+
     @Resource
-    private UserRoleService userRoleService;
+    private UserRoleRefService userRoleRefService;
 
     @PostMapping
-    public Result add(@Validated @RequestBody UserRole userRole) {
-        userRoleService.save(userRole);
+    public Result add(@Validated @RequestBody UserRoleRef userRoleRef) {
+        userRoleRefService.save(userRoleRef);
         return ResultGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        userRoleService.deleteByPK(id);
+        userRoleRefService.deleteByPK(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PutMapping
-    public Result update(@Validated @RequestBody UserRole userRole) {
-        userRoleService.updateByPK(userRole);
+    public Result update(@Validated @RequestBody UserRoleRef userRoleRef) {
+        userRoleRefService.updateByPK(userRoleRef);
         return ResultGenerator.genSuccessResult();
     }
 
     @GetMapping("/{id}")
     public Result detail(@PathVariable Long id) {
-        UserRole userRole = userRoleService.findById(id);
-        return ResultGenerator.genSuccessResult(userRole);
+        UserRoleRef userRoleRef = userRoleRefService.findById(id);
+        return ResultGenerator.genSuccessResult(userRoleRef);
     }
 
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<UserRole> list = userRoleService.findAll();
+        List<UserRoleRef> list = userRoleRefService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
