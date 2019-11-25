@@ -1,5 +1,6 @@
 package com.mf.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -13,13 +14,13 @@ public class Permission {
     private Long createBy;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "last_modified_by")
     private Long lastModifiedBy;
 
     @Column(name = "last_modified_date")
-    private Date lastModifiedDate;
+    private LocalDateTime lastModifiedDate;
 
     @Column(name = "is_delete")
     private Boolean isDelete;
@@ -82,14 +83,14 @@ public class Permission {
     /**
      * @return created_date
      */
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
     /**
      * @param createdDate
      */
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -110,14 +111,14 @@ public class Permission {
     /**
      * @return last_modified_date
      */
-    public Date getLastModifiedDate() {
+    public LocalDateTime getLastModifiedDate() {
         return lastModifiedDate;
     }
 
     /**
      * @param lastModifiedDate
      */
-    public void setLastModifiedDate(Date lastModifiedDate) {
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 

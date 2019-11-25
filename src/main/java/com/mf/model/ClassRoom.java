@@ -1,5 +1,6 @@
 package com.mf.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -13,13 +14,13 @@ public class ClassRoom {
     private Long createBy;
 
     @Column(name = "create_date")
-    private Date createDate;
+    private LocalDateTime createDate;
 
     @Column(name = "last_modified_by")
     private Long lastModifiedBy;
 
     @Column(name = "last_modified_date")
-    private Date lastModifiedDate;
+    private LocalDateTime lastModifiedDate;
 
     @Column(name = "is_delete")
     private Boolean isDelete;
@@ -39,13 +40,13 @@ public class ClassRoom {
      * 开班时间
      */
     @Column(name = "class_start_time")
-    private Date classStartTime;
+    private LocalDateTime classStartTime;
 
     /**
      * 关班时间
      */
     @Column(name = "class_end_time")
-    private Date classEndTime;
+    private LocalDateTime classEndTime;
 
     @Column(name = "class_code")
     private String classCode;
@@ -83,14 +84,14 @@ public class ClassRoom {
     /**
      * @return create_date
      */
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
     /**
      * @param createDate
      */
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -111,14 +112,14 @@ public class ClassRoom {
     /**
      * @return last_modified_date
      */
-    public Date getLastModifiedDate() {
+    public LocalDateTime getLastModifiedDate() {
         return lastModifiedDate;
     }
 
     /**
      * @param lastModifiedDate
      */
-    public void setLastModifiedDate(Date lastModifiedDate) {
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 
@@ -187,7 +188,7 @@ public class ClassRoom {
      *
      * @return class_start_time - 开班时间
      */
-    public Date getClassStartTime() {
+    public LocalDateTime getClassStartTime() {
         return classStartTime;
     }
 
@@ -196,7 +197,7 @@ public class ClassRoom {
      *
      * @param classStartTime 开班时间
      */
-    public void setClassStartTime(Date classStartTime) {
+    public void setClassStartTime(LocalDateTime classStartTime) {
         this.classStartTime = classStartTime;
     }
 
@@ -205,7 +206,7 @@ public class ClassRoom {
      *
      * @return class_end_time - 关班时间
      */
-    public Date getClassEndTime() {
+    public LocalDateTime getClassEndTime() {
         return classEndTime;
     }
 
@@ -214,7 +215,7 @@ public class ClassRoom {
      *
      * @param classEndTime 关班时间
      */
-    public void setClassEndTime(Date classEndTime) {
+    public void setClassEndTime(LocalDateTime classEndTime) {
         this.classEndTime = classEndTime;
     }
 
