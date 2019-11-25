@@ -42,7 +42,7 @@
   <select id="getUserRoleByUserId" resultMap="correlationResultMap">
     SELECT tu.*, tr.name AS roleName, tr.id AS roleId
     FROM tbl_user tu
-    left JOIN  tbl_user_role tur
+    left JOIN  tbl_user_role_ref tur
     ON tu.id = tur.user_id
     left JOIN tbl_role tr ON tr.id = tur.role_id
     WHERE tu.id = #{id}

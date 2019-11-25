@@ -13,7 +13,7 @@
 
     <select id="findRolesByUserId" resultMap="BaseResultMap">
       SELECT r.*
-      FROM tbl_user_role ur,
+      FROM tbl_user_role_ref ur,
       tbl_role r
       WHERE ur.role_id = r.id AND ur.user_id = #{userId}
     </select>
