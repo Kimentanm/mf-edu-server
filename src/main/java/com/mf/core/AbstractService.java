@@ -16,7 +16,7 @@ import java.util.List;
  */
 public abstract class AbstractService<T> implements Service<T> {
 
-    private static String field_name_is_delete = "is_delete";
+    private static String field_name_is_delete = "isDelete";
 
     private static String field_name_create_user_id = "createdBy";
 
