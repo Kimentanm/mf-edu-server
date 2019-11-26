@@ -21,6 +21,9 @@ public class News {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
+    @Column(name = "is_delete")
+    private Boolean isDelete;
+
     private Integer version;
 
     /**
@@ -79,6 +82,14 @@ public class News {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean delete) {
+        isDelete = delete;
     }
 
     /**

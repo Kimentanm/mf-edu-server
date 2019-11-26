@@ -13,6 +13,7 @@
     <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
     <result column="status" jdbcType="VARCHAR" property="status"/>
     <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="is_delete" jdbcType="BIT" property="isDelete"/>
     <result column="type" jdbcType="VARCHAR" property="type"/>
     <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
     <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>

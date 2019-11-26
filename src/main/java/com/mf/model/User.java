@@ -29,6 +29,9 @@ public class User {
 
     private String password;
 
+    @Column(name = "is_delete")
+    private Boolean isDelete;
+
     /**
      * 0: 平台用户，1:公司用户
      */
@@ -76,6 +79,14 @@ public class User {
     @Transient
     private UserRoleRef userRoleRef;
 
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean delete) {
+        isDelete = delete;
+    }
 
     /**
      * @return id

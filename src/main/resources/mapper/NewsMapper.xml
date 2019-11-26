@@ -13,6 +13,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete"/>
     <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
     <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
     <result column="status" jdbcType="INTEGER" property="status" />

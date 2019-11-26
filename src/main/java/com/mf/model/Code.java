@@ -35,6 +35,17 @@ public class Code {
     @Column(name = "code_group_code")
     private String codeGroupCode;
 
+    @Column(name = "is_delete")
+    private Boolean isDelete;
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
     /**
      * @return id
      */

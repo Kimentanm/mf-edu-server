@@ -98,14 +98,6 @@ public class Student {
         this.createdDate = createdDate;
     }
 
-    public Boolean getDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
-    }
-
     public Boolean getUse() {
         return isUse;
     }

@@ -14,6 +14,17 @@ public class Role {
 
     private String description;
 
+    @Column(name = "is_delete")
+    private Boolean isDelete;
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
     /**
      * @return id
      */

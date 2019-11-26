@@ -12,6 +12,7 @@
     <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete"/>
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="seq_num" jdbcType="INTEGER" property="seqNum" />
     <result column="description" jdbcType="VARCHAR" property="description" />

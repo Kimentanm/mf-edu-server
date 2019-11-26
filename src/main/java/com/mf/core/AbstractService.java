@@ -16,6 +16,8 @@ import java.util.List;
  */
 public abstract class AbstractService<T> implements Service<T> {
 
+    private static String field_name_is_delete = "is_delete";
+
     private static String field_name_create_user_id = "createdBy";
 
     private static String field_name_create_date = "createdDate";
@@ -54,7 +56,14 @@ public abstract class AbstractService<T> implements Service<T> {
         Long currentUserId = SecurityUtils.getCurrentUserId();
 //        Date currentDate = new Date();
         LocalDateTime currentDate = LocalDateTime.now();
-        if("create".equalsIgnoreCase(actionType)) {
+        if ("create".equalsIgnoreCase(actionType)) {
+            if (isFieldExist(model, field_name_is_delete)) {
+                Object isDelete = Reflections.invokeGetter(model, field_name_is_delete);
+                if (isDelete == null) {
+                    Reflections.invokeSetter(model, field_name_is_delete, false);
+                }
+            }
+
             if (isFieldExist(model, field_name_create_date)) {
                 Object createDate = Reflections.invokeGetter(model, field_name_create_date);
                 if (createDate == null) {
@@ -77,7 +86,7 @@ public abstract class AbstractService<T> implements Service<T> {
         }
 
         if (isFieldExist(model, field_name_update_user_id)) {
-                Reflections.invokeSetter(model, field_name_update_user_id, currentUserId);
+            Reflections.invokeSetter(model, field_name_update_user_id, currentUserId);
         }
 
         if (isFieldExist(model, field_name_version)) {
@@ -112,9 +121,9 @@ public abstract class AbstractService<T> implements Service<T> {
 
         mapper.insertSelective(model);
 
-        if(isFieldExist(model,field_name_id)){
+        if (isFieldExist(model, field_name_id)) {
             return (long) Reflections.invokeGetter(model, field_name_id);
-        }else{
+        } else {
             return null;
         }
     }
@@ -138,32 +147,32 @@ public abstract class AbstractService<T> implements Service<T> {
     public int updateByPK(T model) {
         this.populateAuditInfo(model, "update");
         return mapper.updateByPrimaryKey(model);
-        
+
     }
-    
+
     public int updateByPKSelective(T model) {
-    	this.populateAuditInfo(model, "update");
-    	return mapper.updateByPrimaryKeySelective(model);
+        this.populateAuditInfo(model, "update");
+        return mapper.updateByPrimaryKeySelective(model);
     }
 
     public T findById(Long id) {
         return mapper.selectByPrimaryKey(id);
     }
-    
-    public T findOne(T entity){
+
+    public T findOne(T entity) {
         T result = mapper.selectOne(entity);
         return result;
     }
-    
+
     @Override
     public int count(T entity) {
-        int result =  mapper.selectCount(entity);
+        int result = mapper.selectCount(entity);
         return result;
     }
-    
+
     @Override
     public List<T> find(T entity) {
-    		List<T> result = mapper.select(entity);
+        List<T> result = mapper.select(entity);
         return result;
     }
 

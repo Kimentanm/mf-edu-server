@@ -53,6 +53,7 @@ public class ClassRoom {
 
     private Integer version;
 
+
     /**
      * @return id
      */
@@ -95,14 +96,6 @@ public class ClassRoom {
 
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public Boolean getDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
     }
 
     /**
