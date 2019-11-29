@@ -53,4 +53,18 @@ public class TeacherController {
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
+
+    /**
+     * 根据教师姓名模糊查询
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/name")
+    public Result getByTeacherName(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam String name) {
+        PageHelper.startPage(page, size);
+        List<Teacher> list = teacherService.getLikeTeacherName(name);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
 }
