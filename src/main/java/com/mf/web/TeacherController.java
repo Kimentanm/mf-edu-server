@@ -61,7 +61,7 @@ public class TeacherController {
      * @return
      */
     @GetMapping("/name")
-    public Result getByTeacherName(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam String name) {
+    public Result getByTeacherName(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam(required = false) String name) {
         PageHelper.startPage(page, size);
         List<Teacher> list = teacherService.getLikeTeacherName(name);
         PageInfo pageInfo = new PageInfo(list);
