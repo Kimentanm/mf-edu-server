@@ -30,7 +30,7 @@
         FROM tbl_teacher
         <where>
             <if test="userName != null">
-                AND user_name like concat('%',#{userName},'%');
+                AND user_name like concat('%',#{userName},'%')
             </if>
         </where>
     </select>
