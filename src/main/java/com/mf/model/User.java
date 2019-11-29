@@ -8,10 +8,7 @@ import java.util.List;
 
 @Data
 @Table(name = "tbl_user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseModal{
 
     private String mobile;
 
@@ -40,20 +37,6 @@ public class User {
      */
     private String type;
 
-    @Column(name = "created_by")
-    private Long createdBy;
-
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-
-    @Column(name = "last_modified_by")
-    private Long lastModifiedBy;
-
-    @Column(name = "last_modified_date")
-    private LocalDateTime lastModifiedDate;
-
-    private Integer version;
-
     @Transient
     private List<Role> roles;
 
@@ -70,14 +53,6 @@ public class User {
 
     @Transient
     private Role role;
-
-    public UserRoleRef getUserRoleRef() {
-        return userRoleRef;
-    }
-
-    public void setUserRoleRef(UserRoleRef userRoleRef) {
-        this.userRoleRef = userRoleRef;
-    }
 
     @Transient
     private UserRoleRef userRoleRef;

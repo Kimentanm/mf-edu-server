@@ -8,25 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_class_room")
-public class ClassRoom {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "created_by")
-    private Long createdBy;
-
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-
-    @Column(name = "last_modified_by")
-    private Long lastModifiedBy;
-
-    @Column(name = "last_modified_date")
-    private LocalDateTime lastModifiedDate;
-
-    @Column(name = "is_delete")
-    private Boolean isDelete;
+public class ClassRoom extends BaseModal{
 
     @Column(name = "class_name")
     private String className;
@@ -53,7 +35,5 @@ public class ClassRoom {
 
     @Column(name = "class_code")
     private String classCode;
-
-    private Integer version;
 
 }

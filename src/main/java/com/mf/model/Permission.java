@@ -8,25 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_permission")
-public class Permission {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "created_by")
-    private Long createdBy;
-
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
-
-    @Column(name = "last_modified_by")
-    private Long lastModifiedBy;
-
-    @Column(name = "last_modified_date")
-    private LocalDateTime lastModifiedDate;
-
-    @Column(name = "is_delete")
-    private Boolean isDelete;
+public class Permission extends BaseModal{
 
     @Column(name = "can_delete")
     private Boolean canDelete;
@@ -52,7 +34,4 @@ public class Permission {
 
     @Column(name = "parent_permission_id")
     private Long parentPermissionId;
-
-    private Integer version;
-
 }
