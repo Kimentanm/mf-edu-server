@@ -1,9 +1,10 @@
-package com.mf.dto;
+package com.mf.util.data.permission;
 
 import com.google.common.base.Converter;
 import com.mf.model.Permission;
 
 import java.util.List;
+import java.util.Map;
 
 public class PermissionListDTO {
 
@@ -47,7 +48,7 @@ public class PermissionListDTO {
     /**
      * 子权限
      */
-    private List<PermissionListDTO> sonPermissions;
+    private Map<Long,List<PermissionListDTO>> sonPermissions;
 
     public Long getPermissionId() {
         return permissionId;
@@ -113,11 +114,11 @@ public class PermissionListDTO {
         this.resourceUrl = resourceUrl;
     }
 
-    public List<PermissionListDTO> getSonPermissions() {
+    public Map<Long, List<PermissionListDTO>> getSonPermissions() {
         return sonPermissions;
     }
 
-    public void setSonPermissions(List<PermissionListDTO> sonPermissions) {
+    public void setSonPermissions(Map<Long, List<PermissionListDTO>> sonPermissions) {
         this.sonPermissions = sonPermissions;
     }
 

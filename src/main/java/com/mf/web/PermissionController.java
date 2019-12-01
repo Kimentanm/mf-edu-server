@@ -2,7 +2,7 @@ package com.mf.web;
 
 import com.mf.core.Result;
 import com.mf.core.ResultGenerator;
-import com.mf.dto.PermissionListDTO;
+import com.mf.util.data.permission.PermissionListDTO;
 import com.mf.model.Permission;
 import com.mf.service.PermissionService;
 import com.github.pagehelper.PageHelper;
@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -60,19 +61,20 @@ public class PermissionController {
 
     @GetMapping(params = "action=permission-list")
     public Result getPermissionTree() {
-        List<Permission> permissions = permissionService.getPermissionList(null);
-        List<PermissionListDTO> listDTOS = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(permissions)){
-            for (Permission permission : permissions) {
-                    PermissionListDTO permissionDTO = new PermissionListDTO().convertFrom(permission);
-                    if (CollectionUtils.isNotEmpty(permissionService.getPermissionList(permission.getId()))) {
-                        List<PermissionListDTO> dtos = permissionService.getPermissionList(permission.getId()).stream().map(permission1 ->
-                                new PermissionListDTO().convertFrom(permission1)).collect(Collectors.toList());
-                        permissionDTO.setSonPermissions(dtos);
-                    }
-                    listDTOS.add(permissionDTO);
-                }
-        }
-        return ResultGenerator.genSuccessResult(listDTOS);
+//        List<Permission> permissions = permissionService.getPermissionList(null);
+//        List<PermissionListDTO> listDTOS = new ArrayList<>();
+//        if (CollectionUtils.isNotEmpty(permissions)){
+//            for (Permission permission : permissions) {
+//                    PermissionListDTO permissionDTO = new PermissionListDTO().convertFrom(permission);
+//                    if (CollectionUtils.isNotEmpty(permissionService.getPermissionList(permission.getId()))) {
+//                        List<PermissionListDTO> dtos = permissionService.getPermissionList(permission.getId()).stream().map(permission1 ->
+//                                new PermissionListDTO().convertFrom(permission1)).collect(Collectors.toList());
+//                        permissionDTO.setSonPermissions(dtos);
+//                    }
+//                    listDTOS.add(permissionDTO);
+//                }
+//        }
+        List<PermissionListDTO> getPermissionTree = permissionService.getPermissionTree();
+        return ResultGenerator.genSuccessResult(getPermissionTree);
     }
 }
