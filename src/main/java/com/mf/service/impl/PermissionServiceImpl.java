@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
 * Created by CodeGenerator on 2019/11/24.
@@ -19,4 +20,14 @@ public class PermissionServiceImpl extends AbstractService<Permission> implement
     @Resource
     private PermissionMapper tblPermissionMapper;
 
+    @Override
+    public List<Permission> getPermissionList(Long id) {
+        List<Permission> list = tblPermissionMapper.getSonPermissions(id);
+//        if (CollectionUtils.isNotEmpty(list)){
+//            for (Permission permission : list){
+//
+//            }
+//        }
+        return list;
+    }
 }
