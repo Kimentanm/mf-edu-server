@@ -59,7 +59,7 @@ public class PermissionController {
         return ResultGenerator.genSuccessResult(pageInfo);
     }
 
-    @GetMapping(params = "action=permission-list")
+    @GetMapping("/permission-list")
     public Result getPermissionTree() {
 //        List<Permission> permissions = permissionService.getPermissionList(null);
 //        List<PermissionListDTO> listDTOS = new ArrayList<>();
