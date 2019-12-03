@@ -67,20 +67,6 @@ public class PermissionController {
         permission.setPermissionName("全部权限");
         List<Permission> permissionChildren = permissionService.getPermissionChildren(permission, all);
         permission.setChildren(permissionChildren);
-//        List<Permission> permissions = permissionService.getPermissionList(null);
-//        List<PermissionListDTO> listDTOS = new ArrayList<>();
-//        if (CollectionUtils.isNotEmpty(permissions)){
-//            for (Permission permission : permissions) {
-//                    PermissionListDTO permissionDTO = new PermissionListDTO().convertFrom(permission);
-//                    if (CollectionUtils.isNotEmpty(permissionService.getPermissionList(permission.getId()))) {
-//                        List<PermissionListDTO> dtos = permissionService.getPermissionList(permission.getId()).stream().map(permission1 ->
-//                                new PermissionListDTO().convertFrom(permission1)).collect(Collectors.toList());
-//                        permissionDTO.setSonPermissions(dtos);
-//                    }
-//                    listDTOS.add(permissionDTO);
-//                }
-//        }
-//        List<PermissionListDTO> getPermissionTree = permissionService.getPermissionTree();
         return ResultGenerator.genSuccessResult(permission);
     }
 }
