@@ -15,4 +15,6 @@ public interface PermissionService extends Service<Permission> {
     List<Permission> getPermissionList(Long id);
 
     List<PermissionListDTO> getPermissionTree();
+
+    List<Permission> getPermissionChildren(Permission permission, List<Permission> all);
 }

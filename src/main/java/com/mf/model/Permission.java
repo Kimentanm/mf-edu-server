@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Data
@@ -34,4 +35,7 @@ public class Permission extends BaseModal{
 
     @Column(name = "parent_permission_id")
     private Long parentPermissionId;
+
+    @Transient
+    private List<Permission> children;
 }

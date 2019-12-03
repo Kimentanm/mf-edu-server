@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -44,6 +41,20 @@ public class PermissionServiceImpl extends AbstractService<Permission> implement
         List<Permission> permissions = permissionService.findAll();
         List<PermissionListDTO> dtos = this.treePermission(permissions);
         return dtos;
+    }
+
+    @Override
+    public List<Permission> getPermissionChildren(Permission treeNode, List<Permission> treeNodes) {
+       Long parentId = treeNode.getId();
+       List<Permission> permissionList = new ArrayList<>();
+        for (Permission node : treeNodes) {
+            if (node.getParentPermissionId().equals(parentId)) {
+                List<Permission> children = getPermissionChildren(node, treeNodes);
+                node.setChildren(children);
+                permissionList.add(node);
+            }
+        }
+        return permissionList;
     }
 
     private List<PermissionListDTO> treePermission(List<Permission> permissions){

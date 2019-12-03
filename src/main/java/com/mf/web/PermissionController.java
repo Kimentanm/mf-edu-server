@@ -61,6 +61,12 @@ public class PermissionController {
 
     @GetMapping("/permission-list")
     public Result getPermissionTree() {
+        List<Permission> all = permissionService.findAll();
+        Permission permission = new Permission();
+        permission.setId(0L);
+        permission.setPermissionName("全部权限");
+        List<Permission> permissionChildren = permissionService.getPermissionChildren(permission, all);
+        permission.setChildren(permissionChildren);
 //        List<Permission> permissions = permissionService.getPermissionList(null);
 //        List<PermissionListDTO> listDTOS = new ArrayList<>();
 //        if (CollectionUtils.isNotEmpty(permissions)){
@@ -74,7 +80,7 @@ public class PermissionController {
 //                    listDTOS.add(permissionDTO);
 //                }
 //        }
-        List<PermissionListDTO> getPermissionTree = permissionService.getPermissionTree();
-        return ResultGenerator.genSuccessResult(getPermissionTree);
+//        List<PermissionListDTO> getPermissionTree = permissionService.getPermissionTree();
+        return ResultGenerator.genSuccessResult(permission);
     }
 }
