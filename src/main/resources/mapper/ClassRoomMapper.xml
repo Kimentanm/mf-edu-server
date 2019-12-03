@@ -6,16 +6,15 @@
           WARNING - @mbg.generated
         -->
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
-        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createdDate"/>
         <result column="last_modified_by" jdbcType="BIGINT" property="lastModifiedBy"/>
         <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate"/>
         <result column="is_delete" jdbcType="BIT" property="isDelete"/>
         <result column="class_name" jdbcType="VARCHAR" property="className"/>
         <result column="curriculum" jdbcType="VARCHAR" property="curriculum"/>
         <result column="teacher_id" jdbcType="BIGINT" property="teacherId"/>
-        <result column="class_start_time" jdbcType="TIMESTAMP" property="classStartTime"/>
-        <result column="class_end_time" jdbcType="TIMESTAMP" property="classEndTime"/>
+        <result column="student_id" jdbcType="BIGINT" property="studentId"/>
         <result column="class_code" jdbcType="VARCHAR" property="classCode"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
     </resultMap>

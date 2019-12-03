@@ -21,17 +21,8 @@ public class ClassRoom extends BaseModal{
     @Column(name = "teacher_id")
     private Long teacherId;
 
-    /**
-     * 开班时间
-     */
-    @Column(name = "class_start_time")
-    private LocalDateTime classStartTime;
-
-    /**
-     * 关班时间
-     */
-    @Column(name = "class_end_time")
-    private LocalDateTime classEndTime;
+    @Column(name = "student_id")
+    private Long studentId;
 
     @Column(name = "class_code")
     private String classCode;
