@@ -27,4 +27,20 @@ public class ClassPowerPointController {
     public void handleNextPPT(MessageBO messageBO) {
         messagingTemplate.convertAndSend("/topic/ppt/next/" + messageBO.getReceiver(), messageBO);
     }
+
+    @MessageMapping("/sendPaletteOffer")
+    public void handleSendPaletteOffer(MessageBO messageBO) {
+        String desc = "/topic/sendPaletteOffer/" + messageBO.getReceiver();
+        messagingTemplate.convertAndSend(desc, messageBO);
+    }
+
+    @MessageMapping("/sendPaletteAnswer")
+    public void handleSendPaletteAnswer(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendPaletteAnswer/" + messageBO.getReceiver(), messageBO);
+    }
+
+    @MessageMapping("/sendPaletteICE")
+    public void handleSendPaletteICE(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendPaletteICE/" + messageBO.getReceiver(), messageBO);
+    }
 }
