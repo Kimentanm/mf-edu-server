@@ -11,4 +11,10 @@ import java.util.List;
 public interface TeacherService extends Service<Teacher> {
 
     List<Teacher> getLikeTeacherName(String name);
+
+    Teacher findByTeacherName(String userName);
+
+    Long saveTeacher(Teacher teacher);
+
+    Teacher getTeacherIdentity(Long id);
 }

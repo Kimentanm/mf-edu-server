@@ -1,8 +1,10 @@
 package com.mf.web;
 
 import com.mf.core.Result;
+import com.mf.core.ResultCode;
 import com.mf.core.ResultGenerator;
 import com.mf.model.Teacher;
+import com.mf.security.SecurityUtils;
 import com.mf.service.TeacherService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,7 +26,7 @@ public class TeacherController {
 
     @PostMapping
     public Result add(@Validated @RequestBody Teacher teacher) {
-        teacherService.save(teacher);
+        teacherService.saveTeacher(teacher);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -36,7 +38,7 @@ public class TeacherController {
 
     @PutMapping
     public Result update(@Validated @RequestBody Teacher teacher) {
-        teacherService.updateByPK(teacher);
+        teacherService.updateByPKSelective(teacher);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -66,5 +68,17 @@ public class TeacherController {
         List<Teacher> list = teacherService.getLikeTeacherName(name);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    /**
+     * 获取教师个人信息
+     * @return
+     */
+    @GetMapping("/identity")
+    public Result getTeacherIdentity() {
+        Teacher user = teacherService.getTeacherIdentity(SecurityUtils.getCurrentUserId());
+        if(user == null)
+            ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST);
+        return ResultGenerator.genSuccessResult(user);
     }
 }

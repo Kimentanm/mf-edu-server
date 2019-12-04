@@ -54,13 +54,12 @@ public class UserJWTController {
     public Result authorize(@Valid @RequestBody LoginDTO loginDTO, HttpServletResponse response) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
-            new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
+            new UsernamePasswordAuthenticationToken(loginDTO.getUsername() + ":" + loginDTO.getType(), loginDTO.getPassword());
 
         try {
             Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            boolean rememberMe = (loginDTO.isRememberMe() == null) ? false : loginDTO.isRememberMe();
-            String jwt = tokenProvider.createToken(authentication, rememberMe);
+            String jwt = tokenProvider.createToken(authentication, false);
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResultGenerator.genSuccessResult(jwt);
         } catch (AuthenticationException ae) {

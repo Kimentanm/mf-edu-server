@@ -8,4 +8,9 @@ import com.mf.model.Student;
  */
 public interface StudentService extends Service<Student> {
 
+    Student findByStudentName(String userName);
+
+    Long saveStudent(Student student);
+
+    Student getStudentIdentity(Long currentUserId);
 }

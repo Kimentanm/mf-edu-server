@@ -32,6 +32,11 @@ public class UserRoleRefServiceImpl extends AbstractService<UserRoleRef> impleme
 
     @Override
     public void saveUserRole(Long userId, List<Long> roleIds) {
-        tblUserRoleRefMapper.save(userId, roleIds);
+        roleIds.forEach(roleId -> {
+            UserRoleRef userRoleRef = new UserRoleRef();
+            userRoleRef.setRoleId(roleId);
+            userRoleRef.setUserId(userId);
+            save(userRoleRef);
+        });
     }
 }

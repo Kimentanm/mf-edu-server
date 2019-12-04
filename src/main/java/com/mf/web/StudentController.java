@@ -1,8 +1,10 @@
 package com.mf.web;
 
 import com.mf.core.Result;
+import com.mf.core.ResultCode;
 import com.mf.core.ResultGenerator;
 import com.mf.model.Student;
+import com.mf.security.SecurityUtils;
 import com.mf.service.StudentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,7 +26,7 @@ public class StudentController {
 
     @PostMapping
     public Result add(@Validated @RequestBody Student student) {
-        studentService.save(student);
+        studentService.saveStudent(student);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -52,5 +54,17 @@ public class StudentController {
         List<Student> list = studentService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    /**
+     * 获取教师个人信息
+     * @return
+     */
+    @GetMapping("/identity")
+    public Result getTeacherIdentity() {
+        Student user = studentService.getStudentIdentity(SecurityUtils.getCurrentUserId());
+        if(user == null)
+            ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST);
+        return ResultGenerator.genSuccessResult(user);
     }
 }
