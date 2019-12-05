@@ -3,6 +3,7 @@ package com.mf.web;
 import com.mf.core.Result;
 import com.mf.core.ResultGenerator;
 import com.mf.model.ClassRoom;
+import com.mf.security.SecurityUtils;
 import com.mf.service.ClassRoomService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -49,8 +50,20 @@ public class ClassRoomController {
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<ClassRoom> list = classRoomService.findAll();
+        List<ClassRoom> list = classRoomService.findAllAndTeacherStudent();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @GetMapping("/teacher")
+    public Result getTeacherClassRoom() {
+        List<ClassRoom> list = classRoomService.listByTeacherId(SecurityUtils.getCurrentUserId());
+        return ResultGenerator.genSuccessResult(list);
+    }
+
+    @GetMapping("/student")
+    public Result getStudentClassRoom() {
+        List<ClassRoom> list = classRoomService.listByStudentId(SecurityUtils.getCurrentUserId());
+        return ResultGenerator.genSuccessResult(list);
     }
 }

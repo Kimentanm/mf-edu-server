@@ -27,4 +27,9 @@ public class ClassRoom extends BaseModal{
     @Column(name = "class_code")
     private String classCode;
 
+    @Transient
+    private Teacher teacher;
+
+    @Transient
+    private Student student;
 }
