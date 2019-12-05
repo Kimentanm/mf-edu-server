@@ -9,11 +9,12 @@
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete"/>
   </resultMap>
 
     <select id="findRolesByUserId" resultMap="BaseResultMap">
       SELECT r.*
-      FROM tbl_user_role ur,
+      FROM tbl_user_role_ref ur,
       tbl_role r
       WHERE ur.role_id = r.id AND ur.user_id = #{userId}
     </select>

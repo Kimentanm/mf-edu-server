@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mf.dao.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.mf.model.Permission">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
+        <result column="last_modified_by" jdbcType="BIGINT" property="lastModifiedBy"/>
+        <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate"/>
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <result column="can_delete" jdbcType="BIT" property="canDelete"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="display_sort" jdbcType="INTEGER" property="displaySort"/>
+        <result column="enable" jdbcType="BIT" property="enable"/>
+        <result column="permission_code" jdbcType="VARCHAR" property="permissionCode"/>
+        <result column="permission_name" jdbcType="VARCHAR" property="permissionName"/>
+        <result column="reource_type" jdbcType="VARCHAR" property="reourceType"/>
+        <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl"/>
+        <result column="parent_permission_id" jdbcType="BIGINT" property="parentPermissionId"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+    </resultMap>
+
+    <select id="getSonPermissions" resultMap="BaseResultMap">
+    select *
+    from tbl_permission
+      <if test="id !=null">where parent_permission_id = #{id}</if>
+      <if test="id == null">where parent_permission_id is #{id}</if>
+    order by
+      display_sort
+  </select>
+</mapper>

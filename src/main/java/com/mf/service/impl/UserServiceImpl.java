@@ -8,7 +8,7 @@ import com.mf.model.Role;
 import com.mf.model.User;
 import com.mf.security.SecurityUtils;
 import com.mf.service.RoleService;
-import com.mf.service.UserRoleService;
+import com.mf.service.UserRoleRefService;
 import com.mf.service.UserService;
 import com.mf.util.Constants;
 import com.mf.util.QueryUtil;
@@ -32,12 +32,12 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Lazy
     private PasswordEncoder passwordEncoder;
     @Resource
-    private UserRoleService userRoleService;
+    private UserRoleRefService userRoleRefService;
     @Resource
     private RoleService roleService;
 
     @Override
-    public User findByLoginName(String loginName){
+    public User findByLoginName(String loginName) {
         User user = new User();
         user.setLoginName(loginName);
         return findOne(user);
@@ -57,15 +57,15 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         }
         Long result = super.save(user);
         if (user.getRoleIds() != null && user.getRoleIds().size() > 0) {
-            userRoleService.saveUserRole(result,user.getRoleIds());
+            userRoleRefService.saveUserRole(result, user.getRoleIds());
         }
         return result;
     }
 
     @Override
-    public User getUserIdentity(Long userId){
+    public User getUserIdentity(Long userId) {
         User user = findById(userId);
-        if(user != null){
+        if (user != null) {
             List<Role> roles = roleService.findRolesByUserId(userId);
             user.setRoles(roles);
             user.setRoleIds(roles.stream().map(role -> role.getId()).collect(Collectors.toList()));
@@ -77,26 +77,26 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     public int updateAdmin(User user) {
         int result = 0;
         User u = findById(user.getId());
-        if(StringUtils.isNotBlank(user.getLoginName())){
+        if (StringUtils.isNotBlank(user.getLoginName())) {
             u.setLoginName(user.getLoginName());
         }
-        if(StringUtils.isNotBlank(user.getName())){
+        if (StringUtils.isNotBlank(user.getName())) {
             u.setName(user.getName());
         }
-        if(StringUtils.isNotBlank(user.getMobile())){
+        if (StringUtils.isNotBlank(user.getMobile())) {
             u.setMobile(user.getMobile());
         }
-        if(StringUtils.isNotBlank(user.getEmail())){
+        if (StringUtils.isNotBlank(user.getEmail())) {
             u.setEmail(user.getEmail());
         }
-        if(StringUtils.isNotBlank(user.getImageUrl())){
+        if (StringUtils.isNotBlank(user.getImageUrl())) {
             u.setImageUrl(user.getImageUrl());
         }
 
-        userRoleService.deleteByUserId(user.getId());
+        userRoleRefService.deleteByUserId(user.getId());
         result = super.updateByPK(u);
         if (user.getRoleIds() != null && user.getRoleIds().size() > 0) {
-            userRoleService.saveUserRole(user.getId(),user.getRoleIds());
+            userRoleRefService.saveUserRole(user.getId(), user.getRoleIds());
         }
         return result;
     }
@@ -111,7 +111,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     public void deleteUser(Long userId) {
-        userRoleService.deleteByUserId(userId);
+        userRoleRefService.deleteByUserId(userId);
         deleteByPK(userId);
     }
 
@@ -126,6 +126,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     public void updateImageUrl(String imageUrl) {
-        tblUserMapper.updateImageUrl(SecurityUtils.getCurrentUserId(),imageUrl);
+        tblUserMapper.updateImageUrl(SecurityUtils.getCurrentUserId(), imageUrl);
     }
 }

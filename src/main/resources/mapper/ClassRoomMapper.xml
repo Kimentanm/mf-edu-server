@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mf.dao.ClassRoomMapper">
+    <resultMap id="BaseResultMap" type="com.mf.model.ClassRoom">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createdDate"/>
+        <result column="last_modified_by" jdbcType="BIGINT" property="lastModifiedBy"/>
+        <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate"/>
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <result column="class_name" jdbcType="VARCHAR" property="className"/>
+        <result column="curriculum" jdbcType="VARCHAR" property="curriculum"/>
+        <result column="teacher_id" jdbcType="BIGINT" property="teacherId"/>
+        <result column="student_id" jdbcType="BIGINT" property="studentId"/>
+        <result column="class_code" jdbcType="VARCHAR" property="classCode"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <association property="teacher" javaType="com.mf.model.Teacher">
+            <result column="t_user_name" jdbcType="VARCHAR" property="userName"/>
+            <result column="t_real_name" jdbcType="VARCHAR" property="realName"/>
+        </association>
+        <association property="student" javaType="com.mf.model.Student">
+            <result column="s_user_name" jdbcType="VARCHAR" property="userName"/>
+            <result column="s_real_name" jdbcType="VARCHAR" property="realName"/>
+        </association>
+    </resultMap>
+
+    <sql id="teacher_student_column">
+        b.user_name as t_user_name, b.real_name as t_real_name, c.user_name as s_user_name, c.real_name as s_real_name
+    </sql>
+
+    <select id="findAllAndTeacherStudent" resultMap="BaseResultMap">
+        SELECT *, <include refid="teacher_student_column" />
+        FROM tbl_class_room a
+        LEFT JOIN tbl_teacher b on a.teacher_id = b.id
+        LEFT JOIN tbl_student c on a.student_id = c.id
+    </select>
+
+    <select id="listByTeacherId" resultMap="BaseResultMap">
+        SELECT *, <include refid="teacher_student_column" /> FROM tbl_class_room a
+        LEFT JOIN tbl_teacher b on a.teacher_id = b.id
+        LEFT JOIN tbl_student c on a.student_id = c.id
+        WHERE a.teacher_id = #{teacherId}
+    </select>
+
+    <select id="listByStudentId" resultMap="BaseResultMap">
+        SELECT *, <include refid="teacher_student_column" /> FROM tbl_class_room a
+        LEFT JOIN tbl_teacher b on a.teacher_id = b.id
+        LEFT JOIN tbl_student c on a.student_id = c.id
+        WHERE a.student_id = #{studentId}
+    </select>
+</mapper>

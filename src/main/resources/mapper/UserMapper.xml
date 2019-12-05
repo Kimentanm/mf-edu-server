@@ -13,6 +13,7 @@
     <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
     <result column="status" jdbcType="VARCHAR" property="status"/>
     <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="is_delete" jdbcType="BIT" property="isDelete"/>
     <result column="type" jdbcType="VARCHAR" property="type"/>
     <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
     <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
@@ -42,7 +43,7 @@
   <select id="getUserRoleByUserId" resultMap="correlationResultMap">
     SELECT tu.*, tr.name AS roleName, tr.id AS roleId
     FROM tbl_user tu
-    left JOIN  tbl_user_role tur
+    left JOIN  tbl_user_role_ref tur
     ON tu.id = tur.user_id
     left JOIN tbl_role tr ON tr.id = tur.role_id
     WHERE tu.id = #{id}

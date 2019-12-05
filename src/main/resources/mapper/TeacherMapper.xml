@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mf.dao.TeacherMapper">
+    <resultMap id="BaseResultMap" type="com.mf.model.Teacher">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createdDate"/>
+        <result column="last_modified_by" jdbcType="BIGINT" property="lastModifiedBy"/>
+        <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate"/>
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="is_use" jdbcType="BIT" property="isUse"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="job_number" jdbcType="VARCHAR" property="jobNumber"/>
+        <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"/>
+        <result column="office_phone" jdbcType="VARCHAR" property="officePhone"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+    </resultMap>
+
+    <select id="getLikeTeacherName" resultMap="BaseResultMap">
+        SELECT *
+        FROM tbl_teacher
+        <where>
+            <if test="userName != null">
+                AND user_name like concat('%',#{userName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

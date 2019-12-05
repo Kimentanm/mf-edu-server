@@ -21,7 +21,9 @@ public class QueryUtil {
                     stringBuffer.append(c);
                 }
             }
+            return stringBuffer.toString();
+        } else {
+            return null;
         }
-        return stringBuffer.toString();
     }
 }
