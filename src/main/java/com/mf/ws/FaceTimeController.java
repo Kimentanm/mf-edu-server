@@ -32,4 +32,14 @@ public class FaceTimeController {
     public void handleSendICE(MessageBO messageBO) {
         messagingTemplate.convertAndSend("/topic/sendICE/" + messageBO.getReceiver(), messageBO);
     }
+
+    @MessageMapping("/sendStartRequest")
+    public void handleSendStartRequest(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendStartRequest/" + messageBO.getReceiver(), messageBO);
+    }
+
+    @MessageMapping("/sendStartResponse")
+    public void handleSendStartResponse(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendStartResponse/" + messageBO.getReceiver(), messageBO);
+    }
 }
