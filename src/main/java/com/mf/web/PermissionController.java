@@ -2,20 +2,16 @@ package com.mf.web;
 
 import com.mf.core.Result;
 import com.mf.core.ResultGenerator;
-import com.mf.util.data.permission.PermissionListDTO;
 import com.mf.model.Permission;
 import com.mf.service.PermissionService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.commons.collections.CollectionUtils;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by CodeGenerator on 2019/11/24.
@@ -59,6 +55,10 @@ public class PermissionController {
         return ResultGenerator.genSuccessResult(pageInfo);
     }
 
+    /**
+     * 权限树列表
+     * */
+    @ApiOperation("权限树列表")
     @GetMapping("/permission-list")
     public Result getPermissionTree() {
         List<Permission> all = permissionService.findAll();

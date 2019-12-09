@@ -38,4 +38,18 @@ public class Permission extends BaseModal{
 
     @Transient
     private List<Permission> children;
+
+    @Transient
+    private String title;
+
+    @Transient
+    private Boolean expand;
+
+    public String getTitle() {
+        return permissionName;
+    }
+
+    public Boolean getExpand() {
+        return true;
+    }
 }
