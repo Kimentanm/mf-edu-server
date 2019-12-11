@@ -4,6 +4,10 @@ spring:
     username: kimen
     password: mys@l@kimen
     driver-class-name: com.mysql.jdbc.Driver
+  http:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
 server:
   port: 7070
   context-path: /mf-edu

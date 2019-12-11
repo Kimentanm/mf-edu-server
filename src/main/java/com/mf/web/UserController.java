@@ -114,7 +114,9 @@ public class UserController {
             MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
             Iterator<String> iter = mr.getFileNames();
             while (iter.hasNext()) {
-                FileResultDTO result = qm.uploadInputStream(mr.getFile(iter.next()).getBytes());
+                String next = iter.next();
+                String fileName = mr.getFile(next).getOriginalFilename();
+                FileResultDTO result = qm.uploadInputStream(mr.getFile(fileName).getBytes(), fileName);
                 userService.updateImageUrl(result.getLocation());
                 return ResultGenerator.genSuccessResult(result);
             }
