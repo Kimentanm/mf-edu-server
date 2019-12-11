@@ -57,9 +57,9 @@ public class PermissionController {
 
     /**
      * 权限树列表
-     * */
+     */
     @ApiOperation("权限树列表")
-    @GetMapping("/permission-list")
+    @GetMapping(value = "/permission-list", produces = "application/json")
     public Result getPermissionTree() {
         List<Permission> all = permissionService.findAll();
         Permission permission = new Permission();
