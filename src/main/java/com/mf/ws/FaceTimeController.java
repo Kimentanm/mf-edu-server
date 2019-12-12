@@ -57,4 +57,19 @@ public class FaceTimeController {
     public void handleSendStudentFocus(MessageBO messageBO) {
         messagingTemplate.convertAndSend("/topic/sendStudentFocus/" + messageBO.getReceiver(), messageBO);
     }
+
+    @MessageMapping("/sendEndClass")
+    public void handleSendEndClass(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendEndClass/" + messageBO.getReceiver(), messageBO);
+    }
+
+    @MessageMapping("/sendStartClassRequest")
+    public void handleSendStartClassRequest(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendStartClassRequest/" + messageBO.getReceiver(), messageBO);
+    }
+
+    @MessageMapping("/sendStartClassResponse")
+    public void handleSendStartClassResponse(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/sendStartClassResponse/" + messageBO.getReceiver(), messageBO);
+    }
 }

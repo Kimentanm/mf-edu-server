@@ -22,15 +22,6 @@
     <result column="version" jdbcType="INTEGER" property="version"/>
   </resultMap>
 
-  <resultMap id="correlationResultMap" type="com.mf.model.User" extends="BaseResultMap">
-    <collection property="roles" ofType="com.mf.model.Role">
-      <id column="roleId" jdbcType="BIGINT" property="id" />
-      <result column="code" jdbcType="VARCHAR" property="code" />
-      <result column="roleName" jdbcType="VARCHAR" property="name" />
-      <result column="description" jdbcType="VARCHAR" property="description" />
-    </collection>
-  </resultMap>
-
   <resultMap id="PageResultMap" type="com.mf.model.User" extends="BaseResultMap">
     <collection property="roles" ofType="com.mf.model.Role" column="userId=id"
                 select="com.mf.dao.RoleMapper.findRolesByUserId" >
@@ -39,15 +30,6 @@
       <result column="name" jdbcType="VARCHAR" property="name" />
     </collection>
   </resultMap>
-
-  <select id="getUserRoleByUserId" resultMap="correlationResultMap">
-    SELECT tu.*, tr.name AS roleName, tr.id AS roleId
-    FROM tbl_user tu
-    left JOIN  tbl_user_role_ref tur
-    ON tu.id = tur.user_id
-    left JOIN tbl_role tr ON tr.id = tur.role_id
-    WHERE tu.id = #{id}
-  </select>
 
   <select id="listUserPage" resultMap="PageResultMap">
     SELECT *

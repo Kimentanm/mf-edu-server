@@ -12,9 +12,9 @@
         <result column="is_delete" jdbcType="BIT" property="isDelete"/>
     </resultMap>
 
-    <resultMap id="findRolePermissionByRoleId" type="com.mf.model.Role" extends="BaseResultMap">
-        <collection property="rolePermissions" ofType="com.mf.model.RolePermissionRef" column="roleId"
-        select="com.mf.dao.RolePermissionRefMapper.findRefByRoleId">
+    <resultMap id="PageResultMap" type="com.mf.model.Role" extends="BaseResultMap">
+        <collection property="rolePermissionRefs" ofType="com.mf.model.RolePermissionRef" column="roleId=id"
+        select="com.mf.dao.PermissionMapper.findPermissionsByRoleId">
             <id column="id" jdbcType="BIGINT" property="id"/>
             <result column="roleId" jdbcType="BIGINT" property="roleId"/>
             <result column="permissionId" jdbcType="BIGINT" property="permissionId"/>
@@ -28,7 +28,7 @@
       WHERE ur.role_id = r.id AND ur.user_id = #{userId}
     </select>
 
-    <select id="findRoleById" resultMap="BaseResultMap">
+    <select id="findRoleById" resultMap="PageResultMap">
     SELECT tr.*
     FROM tbl_role tr
     WHERE tr.id = #{id}
