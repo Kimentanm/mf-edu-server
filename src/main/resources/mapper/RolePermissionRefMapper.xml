@@ -14,4 +14,11 @@
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="permission_id" jdbcType="BIGINT" property="permissionId" />
   </resultMap>
+
+  <select id="findRefByRoleId" resultMap="BaseResultMap">
+    select rpf.*
+    from tbl_role_permission_ref rpf
+    where role_id = #{id} and is_delete = 0
+  </select>
+
 </mapper>
