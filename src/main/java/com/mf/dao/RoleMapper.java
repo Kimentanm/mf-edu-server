@@ -12,4 +12,5 @@ public interface RoleMapper extends Mapper<Role> {
     List<Role> pageList();
 
     Role findRoleById(@Param("id") Long id);
+
 }

@@ -31,4 +31,11 @@
     order by
       display_sort
   </select>
+
+    <select id="findPermissionsByRoleId" resultMap="BaseResultMap">
+      SELECT p.*
+      FROM tbl_role_permission_ref rpr,
+      tbl_permission p
+      WHERE rpr.permission_id = p.id AND rpr.role_id = #{roleId}
+    </select>
 </mapper>

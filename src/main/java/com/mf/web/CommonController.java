@@ -36,7 +36,9 @@ public class CommonController {
             MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iter = mRequest.getFileNames();
             while (iter.hasNext()) {
-                FileResultDTO result = qiniuyunManager.uploadInputStream(mRequest.getFile(iter.next()).getBytes());
+                String next = iter.next();
+                String fileName = mRequest.getFile(next).getOriginalFilename();
+                FileResultDTO result = qiniuyunManager.uploadInputStream(mRequest.getFile(next).getBytes(), fileName);
                 return ResultGenerator.genSuccessResult(result);
             }
             return ResultGenerator.genFailResult(">>>file upload failed");
