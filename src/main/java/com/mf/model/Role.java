@@ -18,4 +18,7 @@ public class Role extends BaseModal{
     @Transient
     private List<RolePermissionRef> rolePermissionRefs;
 
+    @Transient
+    private List<Permission> permissions;
+
 }

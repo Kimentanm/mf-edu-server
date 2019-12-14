@@ -13,11 +13,15 @@
     </resultMap>
 
     <resultMap id="PageResultMap" type="com.mf.model.Role" extends="BaseResultMap">
-        <collection property="rolePermissionRefs" ofType="com.mf.model.RolePermissionRef" column="roleId=id"
+        <collection property="permissions" ofType="com.mf.model.Permission" column="roleId=id"
         select="com.mf.dao.PermissionMapper.findPermissionsByRoleId">
             <id column="id" jdbcType="BIGINT" property="id"/>
-            <result column="roleId" jdbcType="BIGINT" property="roleId"/>
-            <result column="permissionId" jdbcType="BIGINT" property="permissionId"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+            <result column="permission_code" jdbcType="VARCHAR" property="permissionCode"/>
+            <result column="permission_name" jdbcType="VARCHAR" property="permissionName"/>
+            <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl"/>
+            <result column="parent_permission_id" jdbcType="BIGINT" property="parentPermissionId"/>
         </collection>
     </resultMap>
 
