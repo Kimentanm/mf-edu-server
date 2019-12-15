@@ -21,6 +21,8 @@
             <result column="permission_code" jdbcType="VARCHAR" property="permissionCode"/>
             <result column="permission_name" jdbcType="VARCHAR" property="permissionName"/>
             <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl"/>
+            <result column="enable" jdbcType="BIT" property="enable"/>
+            <result column="can_delete" jdbcType="BIT" property="canDelete"/>
             <result column="parent_permission_id" jdbcType="BIGINT" property="parentPermissionId"/>
         </collection>
     </resultMap>
