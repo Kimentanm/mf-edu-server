@@ -51,4 +51,11 @@ public class StudentServiceImpl extends AbstractService<Student> implements Stud
     public Student getStudentIdentity(Long id) {
         return findById(id);
     }
+
+    @Override
+    public void delete(Long id) {
+        Student student = findById(id);
+        student.setIsDelete(true);
+        updateByPKSelective(student);
+    }
 }

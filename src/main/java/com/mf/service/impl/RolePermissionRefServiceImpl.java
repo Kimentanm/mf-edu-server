@@ -29,4 +29,11 @@ public class RolePermissionRefServiceImpl extends AbstractService<RolePermission
             save(rolePermissionRef);
         });
     }
+
+    @Override
+    public void delete(Long id) {
+        RolePermissionRef ref = findById(id);
+        ref.setIsDelete(true);
+        updateByPKSelective(ref);
+    }
 }

@@ -60,4 +60,11 @@ public class TeacherServiceImpl extends AbstractService<Teacher> implements Teac
     public Teacher getTeacherIdentity(Long id) {
         return findById(id);
     }
+
+    @Override
+    public void delete(Long id) {
+        Teacher teacher = findById(id);
+        teacher.setIsDelete(true);
+        updateByPKSelective(teacher);
+    }
 }

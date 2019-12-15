@@ -12,4 +12,5 @@ public interface RolePermissionRefService extends Service<RolePermissionRef> {
 
     void saveRolePermission(Long roleId, List<Long> permissionIds);
 
+    void delete(Long id);
 }

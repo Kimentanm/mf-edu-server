@@ -15,8 +15,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2019/11/25.
-*/
+ * Created by CodeGenerator on 2019/11/25.
+ */
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -32,7 +32,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        studentService.deleteByPK(id);
+        studentService.delete(id);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -58,12 +58,13 @@ public class StudentController {
 
     /**
      * 获取教师个人信息
+     *
      * @return
      */
     @GetMapping("/identity")
     public Result getTeacherIdentity() {
         Student user = studentService.getStudentIdentity(SecurityUtils.getCurrentUserId());
-        if(user == null)
+        if (user == null)
             ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST);
         return ResultGenerator.genSuccessResult(user);
     }

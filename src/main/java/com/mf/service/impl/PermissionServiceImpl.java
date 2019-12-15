@@ -15,8 +15,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
-* Created by CodeGenerator on 2019/11/24.
-*/
+ * Created by CodeGenerator on 2019/11/24.
+ */
 @Service
 @Transactional
 public class PermissionServiceImpl extends AbstractService<Permission> implements PermissionService {
@@ -27,8 +27,8 @@ public class PermissionServiceImpl extends AbstractService<Permission> implement
 
     @Override
     public List<Permission> getPermissionChildren(Permission treeNode, List<Permission> treeNodes) {
-       Long parentId = treeNode.getId();
-       List<Permission> permissionList = new ArrayList<>();
+        Long parentId = treeNode.getId();
+        List<Permission> permissionList = new ArrayList<>();
         for (Permission node : treeNodes) {
             if (node.getParentPermissionId().equals(parentId)) {
                 List<Permission> children = getPermissionChildren(node, treeNodes);
@@ -37,5 +37,12 @@ public class PermissionServiceImpl extends AbstractService<Permission> implement
             }
         }
         return permissionList;
+    }
+
+    @Override
+    public void delete(Long id) {
+        Permission permission = findById(id);
+        permission.setIsDelete(true);
+        updateByPKSelective(permission);
     }
 }

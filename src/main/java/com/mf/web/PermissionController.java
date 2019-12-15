@@ -31,7 +31,7 @@ public class PermissionController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        permissionService.deleteByPK(id);
+        permissionService.delete(id);
         return ResultGenerator.genSuccessResult();
     }
 

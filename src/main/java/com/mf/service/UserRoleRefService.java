@@ -14,4 +14,6 @@ public interface UserRoleRefService extends Service<UserRoleRef> {
     int deleteByUserId(Long userId);
 
     void saveUserRole(Long userId, List<Long> roleIds);
+
+
 }

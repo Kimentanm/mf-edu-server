@@ -13,8 +13,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2019/12/11.
-*/
+ * Created by CodeGenerator on 2019/12/11.
+ */
 @RestController
 @RequestMapping("/role/permission/ref")
 public class RolePermissionRefController {
@@ -30,7 +30,7 @@ public class RolePermissionRefController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        rolePermissionRefService.deleteByPK(id);
+        rolePermissionRefService.delete(id);
         return ResultGenerator.genSuccessResult();
     }
 

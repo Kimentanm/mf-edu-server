@@ -11,4 +11,6 @@ import java.util.List;
 public interface PermissionService extends Service<Permission> {
 
     List<Permission> getPermissionChildren(Permission permission, List<Permission> all);
+
+    void delete(Long id);
 }
