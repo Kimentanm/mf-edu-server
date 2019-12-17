@@ -55,7 +55,7 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
         if (StringUtils.isNotBlank(role.getDescription())) {
             db.setDescription(role.getDescription());
         }
-        updateByPK(role);
+        updateByPKSelective(role);
         if (null != role.getPermissionIds() && role.getPermissionIds().size() > 0) {
             rolePermissionRefService.saveRolePermission(role.getId(), role.getPermissionIds());
         }
