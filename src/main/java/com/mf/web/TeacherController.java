@@ -32,7 +32,7 @@ public class TeacherController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        teacherService.deleteByPK(id);
+        teacherService.delete(id);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -58,6 +58,7 @@ public class TeacherController {
 
     /**
      * 根据教师姓名模糊查询
+     *
      * @param page
      * @param size
      * @return
@@ -72,12 +73,13 @@ public class TeacherController {
 
     /**
      * 获取教师个人信息
+     *
      * @return
      */
     @GetMapping("/identity")
     public Result getTeacherIdentity() {
         Teacher user = teacherService.getTeacherIdentity(SecurityUtils.getCurrentUserId());
-        if(user == null)
+        if (user == null)
             ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST);
         return ResultGenerator.genSuccessResult(user);
     }

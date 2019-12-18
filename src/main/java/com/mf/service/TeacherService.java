@@ -17,4 +17,6 @@ public interface TeacherService extends Service<Teacher> {
     Long saveTeacher(Teacher teacher);
 
     Teacher getTeacherIdentity(Long id);
+
+    void delete(Long id);
 }

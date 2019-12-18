@@ -15,7 +15,17 @@ public class Role extends BaseModal{
 
     private String description;
 
+    private Boolean enable;
+
+    private Boolean canDelete;
+
+    @Transient
+    private List<Long> permissionIds;
+
     @Transient
     private List<RolePermissionRef> rolePermissionRefs;
+
+    @Transient
+    private List<Permission> permissions;
 
 }

@@ -34,4 +34,11 @@ public class ClassRoomServiceImpl extends AbstractService<ClassRoom> implements 
     public List<ClassRoom> findAllAndTeacherStudent() {
         return tblClassRoomMapper.findAllAndTeacherStudent();
     }
+
+    @Override
+    public void delete(Long id) {
+        ClassRoom classRoom = findById(id);
+        classRoom.setIsDelete(true);
+        updateByPKSelective(classRoom);
+    }
 }

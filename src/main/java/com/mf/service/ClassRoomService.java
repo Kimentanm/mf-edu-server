@@ -15,4 +15,6 @@ public interface ClassRoomService extends Service<ClassRoom> {
     List<ClassRoom> listByStudentId(Long currentUserId);
 
     List<ClassRoom> findAllAndTeacherStudent();
+
+    void delete(Long id);
 }

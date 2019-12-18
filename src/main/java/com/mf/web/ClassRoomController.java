@@ -31,7 +31,7 @@ public class ClassRoomController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        classRoomService.deleteByPK(id);
+        classRoomService.delete(id);
         return ResultGenerator.genSuccessResult();
     }
 

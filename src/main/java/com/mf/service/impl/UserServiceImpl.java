@@ -12,6 +12,7 @@ import com.mf.service.UserRoleRefService;
 import com.mf.service.UserService;
 import com.mf.util.Constants;
 import com.mf.util.QueryUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -92,8 +93,14 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         if (StringUtils.isNotBlank(user.getImageUrl())) {
             u.setImageUrl(user.getImageUrl());
         }
-
-        userRoleRefService.deleteByUserId(user.getId());
+        List<Role> roles = roleService.findRolesByUserId(user.getId());
+        if (CollectionUtils.isNotEmpty(roles)) {
+            //软删除用户对应的角色
+            roles.forEach(role -> {
+                role.setIsDelete(true);
+                roleService.updateByPKSelective(role);
+            });
+        }
         result = super.updateByPK(u);
         if (user.getRoleIds() != null && user.getRoleIds().size() > 0) {
             userRoleRefService.saveUserRole(user.getId(), user.getRoleIds());
@@ -111,8 +118,17 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     @Override
     public void deleteUser(Long userId) {
-        userRoleRefService.deleteByUserId(userId);
-        deleteByPK(userId);
+        List<Role> roles = roleService.findRolesByUserId(userId);
+        if (CollectionUtils.isNotEmpty(roles)) {
+            //软删除用户对应的角色
+            roles.forEach(role -> {
+                role.setIsDelete(true);
+                roleService.updateByPKSelective(role);
+            });
+        }
+        User user = findById(userId);
+        user.setIsDelete(true);
+        updateByPKSelective(user);
     }
 
     @Override

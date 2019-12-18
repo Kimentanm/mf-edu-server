@@ -9,14 +9,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
-* Created by CodeGenerator on 2019/12/11.
-*/
+ * Created by CodeGenerator on 2019/12/11.
+ */
 @Service
 @Transactional
 public class RolePermissionRefServiceImpl extends AbstractService<RolePermissionRef> implements RolePermissionRefService {
     @Resource
     private RolePermissionRefMapper tblRolePermissionRefMapper;
 
+    @Override
+    public void saveRolePermission(Long roleId, List<Long> permissionIds) {
+        permissionIds.forEach(permissionId -> {
+            RolePermissionRef rolePermissionRef = new RolePermissionRef();
+            rolePermissionRef.setRoleId(roleId);
+            rolePermissionRef.setPermissionId(permissionId);
+            save(rolePermissionRef);
+        });
+    }
+
+    @Override
+    public void delete(Long id) {
+        RolePermissionRef ref = findById(id);
+        ref.setIsDelete(true);
+        updateByPKSelective(ref);
+    }
 }

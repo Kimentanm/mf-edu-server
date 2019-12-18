@@ -31,6 +31,13 @@ public class UserRoleRefServiceImpl extends AbstractService<UserRoleRef> impleme
     }
 
     @Override
+    public void delete(Long id) {
+        UserRoleRef ref = findById(id);
+        ref.setIsDelete(true);
+        updateByPKSelective(ref);
+    }
+
+    @Override
     public void saveUserRole(Long userId, List<Long> roleIds) {
         roleIds.forEach(roleId -> {
             UserRoleRef userRoleRef = new UserRoleRef();

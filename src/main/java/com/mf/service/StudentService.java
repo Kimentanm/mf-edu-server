@@ -13,4 +13,6 @@ public interface StudentService extends Service<Student> {
     Long saveStudent(Student student);
 
     Student getStudentIdentity(Long currentUserId);
+
+    void delete(Long id);
 }

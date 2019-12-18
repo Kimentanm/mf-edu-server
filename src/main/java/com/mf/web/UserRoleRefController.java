@@ -31,7 +31,7 @@ public class UserRoleRefController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        userRoleRefService.deleteByPK(id);
+        userRoleRefService.delete(id);
         return ResultGenerator.genSuccessResult();
     }
 
