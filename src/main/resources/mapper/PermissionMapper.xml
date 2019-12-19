@@ -24,18 +24,20 @@
     </resultMap>
 
     <select id="getSonPermissions" resultMap="BaseResultMap">
-    select *
-    from tbl_permission
-      <if test="id !=null">where parent_permission_id = #{id}</if>
-      <if test="id == null">where parent_permission_id is #{id}</if>
-    order by
-      display_sort
-  </select>
+        select *
+        from tbl_permission
+        <if test="id !=null">where parent_permission_id = #{id}</if>
+        <if test="id == null">where parent_permission_id is #{id}</if>
+        And is_delete = 0
+        order by
+        display_sort
+    </select>
 
     <select id="findPermissionsByRoleId" resultMap="BaseResultMap">
       SELECT p.*
       FROM tbl_role_permission_ref rpr,
       tbl_permission p
       WHERE rpr.permission_id = p.id AND rpr.role_id = #{roleId}
+      AND rpr.is_delete = 0 AND p.is_delete = 0
     </select>
 </mapper>

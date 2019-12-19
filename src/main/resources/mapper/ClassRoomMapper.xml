@@ -32,23 +32,31 @@
     </sql>
 
     <select id="findAllAndTeacherStudent" resultMap="BaseResultMap">
-        SELECT *, <include refid="teacher_student_column" />
+        SELECT *,
+        <include refid="teacher_student_column"/>
         FROM tbl_class_room a
         LEFT JOIN tbl_teacher b on a.teacher_id = b.id
         LEFT JOIN tbl_student c on a.student_id = c.id
+        WHERE a.is_delete = 0
     </select>
 
     <select id="listByTeacherId" resultMap="BaseResultMap">
-        SELECT *, <include refid="teacher_student_column" /> FROM tbl_class_room a
+        SELECT *,
+        <include refid="teacher_student_column"/>
+        FROM tbl_class_room a
         LEFT JOIN tbl_teacher b on a.teacher_id = b.id
         LEFT JOIN tbl_student c on a.student_id = c.id
         WHERE a.teacher_id = #{teacherId}
+        AND a.is_delete = 0
     </select>
 
     <select id="listByStudentId" resultMap="BaseResultMap">
-        SELECT *, <include refid="teacher_student_column" /> FROM tbl_class_room a
+        SELECT *,
+        <include refid="teacher_student_column"/>
+        FROM tbl_class_room a
         LEFT JOIN tbl_teacher b on a.teacher_id = b.id
         LEFT JOIN tbl_student c on a.student_id = c.id
         WHERE a.student_id = #{studentId}
+        AND a.is_delete = 0
     </select>
 </mapper>
