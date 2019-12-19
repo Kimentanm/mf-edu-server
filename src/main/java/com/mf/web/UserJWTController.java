@@ -59,7 +59,7 @@ public class UserJWTController {
         try {
             Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            String jwt = tokenProvider.createToken(authentication, false);
+            String jwt = tokenProvider.createToken(authentication, false, loginDTO.getType());
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResultGenerator.genSuccessResult(jwt);
         } catch (AuthenticationException ae) {
