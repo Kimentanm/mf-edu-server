@@ -25,6 +25,7 @@ public class TokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
     private static final String USER_ID = "user_id";
+    private static final String USER_TYPE = "user_type";
 
     private String secretKey;
 
@@ -40,14 +41,14 @@ public class TokenProvider {
     public void init() {
         this.secretKey = "THNG12FFDKDFK233";
 
-        this.tokenValidityInMilliseconds =1000 * 2592000L;
-        this.tokenValidityInMillisecondsForRememberMe =1000 * 2592000L;
+        this.tokenValidityInMilliseconds = 1000 * 2592000L;
+        this.tokenValidityInMillisecondsForRememberMe = 1000 * 2592000L;
     }
 
-    public String createToken(Authentication authentication, Boolean rememberMe) {
+    public String createToken(Authentication authentication, Boolean rememberMe, String userType) {
         String authorities = authentication.getAuthorities().stream()
-            .map(GrantedAuthority::getAuthority)
-            .collect(Collectors.joining(","));
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
         Date validity;
@@ -59,34 +60,35 @@ public class TokenProvider {
 
         Long tenantId = null;
         Long userId = null;
-        if (authentication.getPrincipal() instanceof AuthenticatedUser){
-            AuthenticatedUser authenticatedUser = (AuthenticatedUser)authentication.getPrincipal();
+        if (authentication.getPrincipal() instanceof AuthenticatedUser) {
+            AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
             tenantId = authenticatedUser.getTenantId();
             userId = authenticatedUser.getUserId();
         }
 
         return Jwts.builder()
-            .setSubject(authentication.getName())
-            .claim(AUTHORITIES_KEY, authorities)
-            .claim(USER_ID, userId)
-            .signWith(SignatureAlgorithm.HS512, secretKey)
-            .setExpiration(validity)
-            .compact();
+                .setSubject(authentication.getName())
+                .claim(AUTHORITIES_KEY, authorities)
+                .claim(USER_ID, userId)
+                .claim(USER_TYPE, userType)
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .setExpiration(validity)
+                .compact();
     }
 
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts.parser()
-            .setSigningKey(secretKey)
-            .parseClaimsJws(token)
-            .getBody();
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
 
         Collection<? extends GrantedAuthority> authorities =
-            Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
 
         Long userId = null;
-        if (claims.get(USER_ID)  != null){
+        if (claims.get(USER_ID) != null) {
             userId = Long.parseLong(claims.get(USER_ID).toString());
         }
 
@@ -100,7 +102,7 @@ public class TokenProvider {
         try {
             Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken).getBody();
             Long userId = null;
-            if (claims.get(USER_ID)  != null){
+            if (claims.get(USER_ID) != null) {
 //                userId = Long.parseLong(claims.get(USER_ID).toString());
                 return true;
             }
