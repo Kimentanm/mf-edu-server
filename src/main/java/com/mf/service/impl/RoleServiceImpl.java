@@ -58,7 +58,9 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
         }
         updateByPKSelective(role);
         //软删除角色和权限的关联关系
-        List<RolePermissionRef> rolePermissionRefs = db.getRolePermissionRefs();
+        RolePermissionRef ref = new RolePermissionRef();
+        ref.setRoleId(db.getId());
+        List<RolePermissionRef> rolePermissionRefs = rolePermissionRefService.find(ref);
         rolePermissionRefs.forEach(rolePermissionRef -> {
             rolePermissionRef.setIsDelete(true);
             rolePermissionRefService.updateByPKSelective(rolePermissionRef);
