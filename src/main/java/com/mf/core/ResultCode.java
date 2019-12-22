@@ -41,6 +41,7 @@ public enum ResultCode {
     USER_RECHARGE_MONEY_EXCEED_THE_LIMIT(820,"用户充值金额超出限定"),
     WECHAT_HAS_ALREADY_BIND_ANOTHER_MOBILE(808,"该微信已绑定另一个手机号"),
     NO_WASH_BARCODE(830,"水洗码未打印无法出库"),
+    ENTITYNOTFOUND(831,"实体未找到"),
 
 
     VERIFY_CODE_ERROR(900, "手机号或者短信验证码错误"),

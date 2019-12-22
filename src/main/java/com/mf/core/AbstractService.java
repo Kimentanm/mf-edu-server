@@ -168,6 +168,15 @@ public abstract class AbstractService<T> implements Service<T> {
         return result;
     }
 
+    public void deleteById(Long id){
+        T db = findById(id);
+        if (null == db){
+            throw new ServiceException(ResultCode.ENTITYNOTFOUND);
+        }
+        Reflections.invokeSetter(db,field_name_is_delete,true);
+        mapper.updateByPrimaryKeySelective(db);
+    }
+
     @Override
     public int count(T entity) {
         int result = mapper.selectCount(entity);
