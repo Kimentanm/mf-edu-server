@@ -30,7 +30,7 @@ public class VersionController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        versionService.deleteByPK(id);
+        versionService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -52,5 +52,14 @@ public class VersionController {
         List<Version> list = versionService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    /**
+     * 获取最新的版本信息
+     */
+    @GetMapping()
+    public Result getLastVersionInfo(@RequestParam("type") String type) {
+        Version version = versionService.getLastVersionInfo(type);
+        return ResultGenerator.genSuccessResult(version);
     }
 }

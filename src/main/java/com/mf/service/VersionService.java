@@ -8,4 +8,5 @@ import com.mf.model.Version;
  */
 public interface VersionService extends Service<Version> {
 
+    Version getLastVersionInfo(String type);
 }
