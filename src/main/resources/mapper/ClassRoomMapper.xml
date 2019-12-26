@@ -17,6 +17,12 @@
         <result column="student_id" jdbcType="BIGINT" property="studentId"/>
         <result column="class_code" jdbcType="VARCHAR" property="classCode"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="grade_id" javaType="BIGINT" property="gradeId"/>
+        <result column="course_id" javaType="BIGINT" property="courseId"/>
+        <result column="pre_open_time" javaType="TIMESTAMP" property="preOpenTime"/>
+        <result column="pre_close_time" javaType="TIMESTAMP" property="preCloseTime"/>
+        <result column="open_time" javaType="TIMESTAMP" property="openTime"/>
+        <result column="close_time" javaType="TIMESTAMP" property="closeTime"/>
         <association property="teacher" javaType="com.mf.model.Teacher">
             <result column="t_user_name" jdbcType="VARCHAR" property="userName"/>
             <result column="t_real_name" jdbcType="VARCHAR" property="realName"/>

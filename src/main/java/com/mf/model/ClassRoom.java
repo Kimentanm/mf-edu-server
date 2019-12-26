@@ -27,6 +27,24 @@ public class ClassRoom extends BaseModal{
     @Column(name = "class_code")
     private String classCode;
 
+    @Column(name = "grade_id")
+    private Long gradeId;
+
+    @Column(name = "course_id")
+    private Long courseId;
+
+    @Column(name = "pre_open_time")
+    private LocalDateTime preOpenTime;
+
+    @Column(name = "pre_close_time")
+    private LocalDateTime preCloseTime;
+
+    @Column(name = "open_time")
+    private LocalDateTime openTime;
+
+    @Column(name = "close_time")
+    private LocalDateTime closeTime;
+
     @Transient
     private Teacher teacher;
 
