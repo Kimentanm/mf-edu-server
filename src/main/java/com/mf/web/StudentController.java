@@ -32,7 +32,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        studentService.delete(id);
+        studentService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 

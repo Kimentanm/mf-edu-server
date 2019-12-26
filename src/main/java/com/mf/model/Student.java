@@ -37,4 +37,6 @@ public class Student extends BaseModal {
     @Column(name = "image_url")
     private String imageUrl;
 
+    private String signature;
+
 }

@@ -22,5 +22,6 @@
         <result column="class_id" jdbcType="BIGINT" property="classId"/>
         <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="signature" javaType="VARCHAR" property="signature"/>
     </resultMap>
 </mapper>
