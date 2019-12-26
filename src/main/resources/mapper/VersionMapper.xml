@@ -19,4 +19,11 @@
         <result column="version" jdbcType="INTEGER" property="version"/>
         <result column="update_log" jdbcType="LONGVARCHAR" property="updateLog"/>
     </resultMap>
+
+    <select id="getLastVersionInfo" resultMap="BaseResultMap">
+        select *
+        from tbl_version
+        where type = #{type}
+        order by created_date limit 1
+    </select>
 </mapper>
