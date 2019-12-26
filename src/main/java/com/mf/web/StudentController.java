@@ -57,12 +57,12 @@ public class StudentController {
     }
 
     /**
-     * 获取教师个人信息
+     * 获取学生个人信息
      *
      * @return
      */
     @GetMapping("/identity")
-    public Result getTeacherIdentity() {
+    public Result getStudentIdentity() {
         Student user = studentService.getStudentIdentity(SecurityUtils.getCurrentUserId());
         if (user == null)
             ResultGenerator.genFailResult(ResultCode.USER_NOT_EXIST);
