@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by CodeGenerator on 2019/12/26.
+ * 课件Controller
  */
 @RestController
 @RequestMapping("/courseware")
@@ -22,30 +22,45 @@ public class CoursewareController {
     @Resource
     private CoursewareService coursewareService;
 
+    /**
+     * 新增课件
+     */
     @PostMapping
     public Result add(@Validated @RequestBody Courseware courseware) {
         coursewareService.save(courseware);
         return ResultGenerator.genSuccessResult();
     }
 
+    /**
+     * 删除课件(软删除)
+     */
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
-        coursewareService.deleteByPK(id);
+        coursewareService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
+    /**
+     * 更新课件
+     */
     @PutMapping
     public Result update(@Validated @RequestBody Courseware courseware) {
         coursewareService.updateByPK(courseware);
         return ResultGenerator.genSuccessResult();
     }
 
+    /**
+     * 查询课件
+     */
     @GetMapping("/{id}")
     public Result detail(@PathVariable Long id) {
         Courseware courseware = coursewareService.findById(id);
         return ResultGenerator.genSuccessResult(courseware);
     }
 
+    /**
+     * 获取分页课件列表
+     */
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
