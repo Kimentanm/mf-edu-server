@@ -24,6 +24,6 @@
         select *
         from tbl_version
         where type = #{type}
-        order by created_date limit 1
+        order by created_date desc limit 1
     </select>
 </mapper>
