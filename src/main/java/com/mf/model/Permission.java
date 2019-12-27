@@ -2,14 +2,12 @@ package com.mf.model;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_permission")
-public class Permission extends BaseModal{
+public class Permission extends BaseModel {
 
     @Column(name = "can_delete")
     private Boolean canDelete;

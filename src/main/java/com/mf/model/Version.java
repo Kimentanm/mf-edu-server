@@ -2,12 +2,11 @@ package com.mf.model;
 
 import lombok.Data;
 
-import java.util.Date;
 import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_version")
-public class Version extends BaseModal{
+public class Version extends BaseModel {
 
     @Column(name = "version_no")
     private Long versionNo;

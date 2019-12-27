@@ -2,13 +2,11 @@ package com.mf.model;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_teacher")
-public class Teacher extends BaseModal{
+public class Teacher extends BaseModel {
 
     @Column(name = "user_name")
     private String userName;

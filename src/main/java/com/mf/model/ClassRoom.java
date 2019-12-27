@@ -3,12 +3,11 @@ package com.mf.model;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_class_room")
-public class ClassRoom extends BaseModal{
+public class ClassRoom extends BaseModel {
 
     @Column(name = "class_name")
     private String className;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_grade")
-public class Grade extends BaseModal {
+public class Grade extends BaseModel {
 
     @Column(name = "grade_name")
     private String gradeName;

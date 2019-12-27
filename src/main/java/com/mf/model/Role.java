@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Table(name = "tbl_role")
-public class Role extends BaseModal{
+public class Role extends BaseModel {
 
     private String code;
 

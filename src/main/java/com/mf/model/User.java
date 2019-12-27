@@ -3,12 +3,11 @@ package com.mf.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Table(name = "tbl_user")
-public class User extends BaseModal{
+public class User extends BaseModel {
 
     private String mobile;
 

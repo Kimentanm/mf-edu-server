@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Table(name = "tbl_course")
-public class Course extends BaseModal {
+public class Course extends BaseModel {
 
     private String description;
 

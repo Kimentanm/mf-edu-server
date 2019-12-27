@@ -3,11 +3,10 @@ package com.mf.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @Table(name = "tbl_code")
-public class Code extends BaseModal{
+public class Code extends BaseModel {
 
     private String code;
 
