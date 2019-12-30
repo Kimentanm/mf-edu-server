@@ -54,7 +54,7 @@ public class UserJWTController {
     public Result authorize(@Valid @RequestBody LoginDTO loginDTO, HttpServletResponse response) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
-            new UsernamePasswordAuthenticationToken(loginDTO.getUsername() + ":" + loginDTO.getType(), loginDTO.getPassword());
+                new UsernamePasswordAuthenticationToken(loginDTO.getUsername() + ":" + loginDTO.getType(), loginDTO.getPassword());
 
         try {
             Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
@@ -64,7 +64,7 @@ public class UserJWTController {
             return ResultGenerator.genSuccessResult(jwt);
         } catch (AuthenticationException ae) {
             log.error("Authentication exception trace: {}", ae);
-            return ResultGenerator.genFailResult("AuthenticationException: "+ae.getMessage());
+            return ResultGenerator.genFailResult("AuthenticationException: " + ae.getMessage());
         }
     }
 
