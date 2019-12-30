@@ -14,8 +14,8 @@ public class RedissonConfig {
         Config config = new Config();
         // 单机模式 依次设置redis地址和密码
         config.useSingleServer().
-                setAddress("redis://IP地址6379").
-                setPassword("你的密码");
+                setAddress("redis://localhost:6379").
+                setPassword("acchow950702");
         return Redisson.create(config);
     }
 }
