@@ -6,6 +6,7 @@ import com.mf.core.Result;
 import com.mf.core.ResultCode;
 import com.mf.core.ResultGenerator;
 import com.mf.dto.FileResultDTO;
+import com.mf.dto.LoginDTO;
 import com.mf.model.User;
 import com.mf.security.SecurityUtils;
 import com.mf.service.UserService;
@@ -132,7 +133,7 @@ public class UserController {
      * @return
      */
     @PutMapping("/password")
-    public Result updatePassword(@RequestBody User user) {
+    public Result updatePassword(@RequestBody LoginDTO user) {
         userService.updatePassword(user);
         return ResultGenerator.genSuccessResult();
     }

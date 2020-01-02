@@ -1,6 +1,7 @@
 package com.mf.service;
 
 import com.mf.core.Service;
+import com.mf.dto.LoginDTO;
 import com.mf.model.User;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface UserService extends Service<User> {
 
     void deleteUser(Long userId);
 
-    void updatePassword(User user);
+    void updatePassword(LoginDTO user);
 
     void updateImageUrl(String location);
 }

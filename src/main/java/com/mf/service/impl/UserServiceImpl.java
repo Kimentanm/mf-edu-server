@@ -4,12 +4,13 @@ import com.mf.core.AbstractService;
 import com.mf.core.ResultCode;
 import com.mf.core.ServiceException;
 import com.mf.dao.UserMapper;
+import com.mf.dto.LoginDTO;
 import com.mf.model.Role;
+import com.mf.model.Student;
+import com.mf.model.Teacher;
 import com.mf.model.User;
 import com.mf.security.SecurityUtils;
-import com.mf.service.RoleService;
-import com.mf.service.UserRoleRefService;
-import com.mf.service.UserService;
+import com.mf.service.*;
 import com.mf.util.Constants;
 import com.mf.util.QueryUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -36,6 +37,10 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     private UserRoleRefService userRoleRefService;
     @Resource
     private RoleService roleService;
+    @Resource
+    private TeacherService teacherService;
+    @Resource
+    private StudentService studentService;
 
     @Override
     public User findByLoginName(String loginName) {
@@ -132,11 +137,27 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     }
 
     @Override
-    public void updatePassword(User model) {
-        User user = findById(model.getId());
-        if (user != null) {
-            user.setPassword(passwordEncoder.encode(model.getPassword()));
-            updateByPK(user);
+    public void updatePassword(LoginDTO model) {
+        switch (model.getType()) {
+            case "ADMIN" : {
+                User user = findById(model.getId());
+                user.setPassword(passwordEncoder.encode(model.getPassword()));
+                updateByPKSelective(user);
+                break;
+            }
+            case "TEACHER" : {
+                Teacher teacher = teacherService.findById(model.getId());
+                teacher.setPassword(passwordEncoder.encode(model.getPassword()));
+                teacherService.updateByPKSelective(teacher);
+                break;
+            }
+            case "STUDENT" : {
+                Student student = studentService.findById(model.getId());
+                student.setPassword(passwordEncoder.encode(model.getPassword()));
+                studentService.updateByPKSelective(student);
+                break;
+            }
+            default:
         }
     }
 
