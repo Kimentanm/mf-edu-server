@@ -7,6 +7,8 @@ import com.mf.core.ResultCode;
 import com.mf.core.ResultGenerator;
 import com.mf.dto.FileResultDTO;
 import com.mf.dto.LoginDTO;
+import com.mf.model.Student;
+import com.mf.model.Teacher;
 import com.mf.model.User;
 import com.mf.security.SecurityUtils;
 import com.mf.service.UserService;
@@ -26,9 +28,6 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
-
-    @Resource
-    private QiniuyunServiceManager qm;
 
     /**
      * 新增用户
@@ -109,20 +108,10 @@ public class UserController {
      * @param response
      * @return
      */
-    @PostMapping("/file/upload")
-    public Result uploadFile(HttpServletRequest request, HttpServletResponse response){
-        try {
-            MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
-            Iterator<String> iter = mr.getFileNames();
-            while (iter.hasNext()) {
-                FileResultDTO result = qm.uploadInputStream(mr.getFile(iter.next()).getBytes(), null);
-                userService.updateImageUrl(result.getLocation());
-                return ResultGenerator.genSuccessResult(result);
-            }
-            return ResultGenerator.genFailResult(">>>file upload failed");
-        } catch (Exception e) {
-            return ResultGenerator.genFailResult(">>>file upload failed");
-        }
+    @PostMapping("/avatar/upload")
+    public Result uploadUserAvatar(HttpServletRequest request, HttpServletResponse response){
+        userService.uploadUserAvatar(request, response);
+        return ResultGenerator.genSuccessResult();
     }
 
     /**

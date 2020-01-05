@@ -2,8 +2,10 @@ package com.mf.service.impl;
 
 import com.mf.core.AbstractService;
 import com.mf.core.ResultCode;
+import com.mf.core.ResultGenerator;
 import com.mf.core.ServiceException;
 import com.mf.dao.UserMapper;
+import com.mf.dto.FileResultDTO;
 import com.mf.dto.LoginDTO;
 import com.mf.model.Role;
 import com.mf.model.Student;
@@ -12,6 +14,7 @@ import com.mf.model.User;
 import com.mf.security.SecurityUtils;
 import com.mf.service.*;
 import com.mf.util.Constants;
+import com.mf.util.QiniuyunServiceManager;
 import com.mf.util.QueryUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,8 +23,12 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +48,8 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     private TeacherService teacherService;
     @Resource
     private StudentService studentService;
+    @Resource
+    private QiniuyunServiceManager qm;
 
     @Override
     public User findByLoginName(String loginName) {
@@ -164,5 +173,40 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Override
     public void updateImageUrl(String imageUrl) {
         tblUserMapper.updateImageUrl(SecurityUtils.getCurrentUserId(), imageUrl);
+    }
+
+    @Override
+    public void uploadUserAvatar(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String type = SecurityUtils.getCurrentUserType();
+            MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
+            Iterator<String> iter = mr.getFileNames();
+            while (iter.hasNext()) {
+                FileResultDTO result = qm.uploadInputStream(mr.getFile(iter.next()).getBytes(), null);
+                String imageUrl = result.getLocation();
+                Long userId = SecurityUtils.getCurrentUserId();
+                switch (type) {
+                    case "ADMIN" : {
+                        updateImageUrl(imageUrl);
+                        break;
+                    }
+                    case "TEACHER" : {
+                        Teacher teacher = teacherService.findById(userId);
+                        teacher.setImageUrl(imageUrl);
+                        teacherService.updateByPKSelective(teacher);
+                        break;
+                    }
+                    case "STUDENT" : {
+                        Student student = studentService.findById(userId);
+                        student.setImageUrl(imageUrl);
+                        studentService.updateByPKSelective(student);
+                        break;
+                    }
+                    default:
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

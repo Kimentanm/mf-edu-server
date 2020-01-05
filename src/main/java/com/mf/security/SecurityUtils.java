@@ -54,6 +54,24 @@ public final class SecurityUtils {
     }
 
     /**
+     * Get the id of the current user.
+     *
+     * @return the type of the current user
+     */
+    public static String getCurrentUserType() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String userType = null;
+        if (authentication != null) {
+            if (authentication.getPrincipal() instanceof UserDetails) {
+                AuthenticatedUser springSecurityUser = (AuthenticatedUser) authentication.getPrincipal();
+                userType = springSecurityUser.getUserType();
+            }
+        }
+        return userType;
+    }
+
+    /**
      * Get the tenantId of the current user.
      *
      * @return the tenantId of the current user

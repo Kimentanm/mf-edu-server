@@ -10,6 +10,7 @@ public class AuthenticatedUser extends User {
 
     private Long tenantId;
     private Long userId;
+    private String userType;
 
     public AuthenticatedUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
@@ -32,4 +33,11 @@ public class AuthenticatedUser extends User {
         this.userId = userId;
     }
 
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 }

@@ -4,6 +4,8 @@ import com.mf.core.Service;
 import com.mf.dto.LoginDTO;
 import com.mf.model.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface UserService extends Service<User> {
@@ -23,4 +25,6 @@ public interface UserService extends Service<User> {
     void updatePassword(LoginDTO user);
 
     void updateImageUrl(String location);
+
+    void uploadUserAvatar(HttpServletRequest request, HttpServletResponse response);
 }
