@@ -2,6 +2,7 @@ package com.mf.web;
 
 import com.mf.core.Result;
 import com.mf.core.ResultGenerator;
+import com.mf.dto.FileResultDTO;
 import com.mf.model.Version;
 import com.mf.service.VersionService;
 import com.github.pagehelper.PageHelper;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -76,5 +78,14 @@ public class VersionController {
     public Result getLastVersionInfo(@RequestParam("type") String type) {
         Version version = versionService.getLastVersionInfo(type);
         return ResultGenerator.genSuccessResult(version);
+    }
+
+    /**
+     * 文件上传
+     */
+    @PostMapping("/resource/upload")
+    public Result uploadResource(HttpServletRequest request) {
+        List<FileResultDTO> result = versionService.resourceUpload(request);
+        return ResultGenerator.genSuccessResult(result);
     }
 }
