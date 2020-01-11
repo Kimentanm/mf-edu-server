@@ -75,6 +75,9 @@ public final class QiniuyunServiceManager {
         //...生成上传凭证，然后准备上传
         //默认不指定key的情况下，以文件内容的hash值作为文件名
         String key = fileName;
+        if (key != null) {
+            key += "_" + System.currentTimeMillis();
+        }
 
         FileResultDTO result = new FileResultDTO();
         try {
