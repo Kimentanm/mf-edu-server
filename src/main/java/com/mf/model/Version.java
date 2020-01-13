@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Version extends BaseModel {
 
     @Column(name = "version_no")
-    private Long versionNo;
+    private String versionNo;
 
     @Column(name = "res_url")
     private String resUrl;

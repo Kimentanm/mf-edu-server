@@ -6,7 +6,7 @@
           WARNING - @mbg.generated
         -->
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="version_no" jdbcType="BIGINT" property="versionNo"/>
+        <result column="version_no" jdbcType="VARCHAR" property="versionNo"/>
         <result column="res_url" jdbcType="VARCHAR" property="resUrl"/>
         <result column="res_hash" jdbcType="VARCHAR" property="resHash"/>
         <result column="type" jdbcType="VARCHAR" property="type"/>
