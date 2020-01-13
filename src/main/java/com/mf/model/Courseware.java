@@ -28,6 +28,8 @@ public class Courseware extends BaseModel {
 
     private String remark;
 
+    private String coverImg;
+
     @Column(name = "download_times")
     private Integer downloadTimes;
 

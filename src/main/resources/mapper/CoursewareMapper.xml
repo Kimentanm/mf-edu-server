@@ -16,6 +16,7 @@
         <result column="courseware_code" jdbcType="VARCHAR" property="coursewareCode"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="cover_img" jdbcType="VARCHAR" property="coverImg"/>
         <result column="type" jdbcType="VARCHAR" property="type"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="download_times" jdbcType="INTEGER" property="downloadTimes"/>
