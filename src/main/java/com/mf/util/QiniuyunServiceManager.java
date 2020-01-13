@@ -76,7 +76,7 @@ public final class QiniuyunServiceManager {
         //默认不指定key的情况下，以文件内容的hash值作为文件名
         String key = fileName;
         if (key != null) {
-            key += "_" + System.currentTimeMillis();
+            key = System.currentTimeMillis() +  "_" + key;
         }
 
         FileResultDTO result = new FileResultDTO();
