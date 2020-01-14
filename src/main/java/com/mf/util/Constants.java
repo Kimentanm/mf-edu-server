@@ -26,4 +26,9 @@ public interface Constants {
         Integer RELEASED = 1;
         Integer UNRELEASE = 0;
     }
+
+    interface CoursewareType {
+        String PUBLIC = "PUBLIC";
+        String PRIVATE = "PRIVATE";
+    }
 }

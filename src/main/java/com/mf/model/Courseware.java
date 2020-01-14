@@ -33,4 +33,7 @@ public class Courseware extends BaseModel {
     @Column(name = "download_times")
     private Integer downloadTimes;
 
+    @Transient
+    private Object createUser;
+
 }

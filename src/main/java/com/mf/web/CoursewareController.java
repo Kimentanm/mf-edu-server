@@ -6,6 +6,7 @@ import com.mf.model.Courseware;
 import com.mf.service.CoursewareService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mf.util.Constants;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -67,5 +68,11 @@ public class CoursewareController {
         List<Courseware> list = coursewareService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @GetMapping("/public")
+    public Result getAllPublic() {
+        List<Courseware> coursewareList = coursewareService.findByType(Constants.CoursewareType.PUBLIC);
+        return ResultGenerator.genSuccessResult(coursewareList);
     }
 }
