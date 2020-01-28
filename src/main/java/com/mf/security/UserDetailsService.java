@@ -85,6 +85,7 @@ public class UserDetailsService implements org.springframework.security.core.use
             AuthenticatedUser authenticatedUser =
                     new AuthenticatedUser(lowercaseLogin, password, grantedAuthorities);
             authenticatedUser.setUserId(userId);
+            authenticatedUser.setUserType(type);
             return authenticatedUser;
         }else{
             throw new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the " +

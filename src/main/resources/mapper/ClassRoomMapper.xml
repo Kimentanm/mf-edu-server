@@ -17,6 +17,12 @@
         <result column="student_id" jdbcType="BIGINT" property="studentId"/>
         <result column="class_code" jdbcType="VARCHAR" property="classCode"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="grade_id" jdbcType="BIGINT" property="gradeId"/>
+        <result column="course_id" jdbcType="BIGINT" property="courseId"/>
+        <result column="pre_open_time" jdbcType="TIMESTAMP" property="preOpenTime"/>
+        <result column="pre_close_time" jdbcType="TIMESTAMP" property="preCloseTime"/>
+        <result column="open_time" jdbcType="TIMESTAMP" property="openTime"/>
+        <result column="close_time" jdbcType="TIMESTAMP" property="closeTime"/>
         <association property="teacher" javaType="com.mf.model.Teacher">
             <result column="t_user_name" jdbcType="VARCHAR" property="userName"/>
             <result column="t_real_name" jdbcType="VARCHAR" property="realName"/>
@@ -32,23 +38,31 @@
     </sql>
 
     <select id="findAllAndTeacherStudent" resultMap="BaseResultMap">
-        SELECT *, <include refid="teacher_student_column" />
+        SELECT *,
+        <include refid="teacher_student_column"/>
         FROM tbl_class_room a
         LEFT JOIN tbl_teacher b on a.teacher_id = b.id
         LEFT JOIN tbl_student c on a.student_id = c.id
+        WHERE a.is_delete = 0
     </select>
 
     <select id="listByTeacherId" resultMap="BaseResultMap">
-        SELECT *, <include refid="teacher_student_column" /> FROM tbl_class_room a
+        SELECT *,
+        <include refid="teacher_student_column"/>
+        FROM tbl_class_room a
         LEFT JOIN tbl_teacher b on a.teacher_id = b.id
         LEFT JOIN tbl_student c on a.student_id = c.id
         WHERE a.teacher_id = #{teacherId}
+        AND a.is_delete = 0
     </select>
 
     <select id="listByStudentId" resultMap="BaseResultMap">
-        SELECT *, <include refid="teacher_student_column" /> FROM tbl_class_room a
+        SELECT *,
+        <include refid="teacher_student_column"/>
+        FROM tbl_class_room a
         LEFT JOIN tbl_teacher b on a.teacher_id = b.id
         LEFT JOIN tbl_student c on a.student_id = c.id
         WHERE a.student_id = #{studentId}
+        AND a.is_delete = 0
     </select>
 </mapper>

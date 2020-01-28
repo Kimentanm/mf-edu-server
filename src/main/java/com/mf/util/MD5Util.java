@@ -1,5 +1,6 @@
 package com.mf.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -28,6 +29,11 @@ public class MD5Util {
     public static String md5HashCode32(String filePath) throws FileNotFoundException{
         FileInputStream fis = new FileInputStream(filePath);
         return md5HashCode32(fis);
+    }
+
+    public static String md5HashCode(byte[] data) {
+        InputStream input = new ByteArrayInputStream(data);
+        return md5HashCode(input);
     }
 
     /**

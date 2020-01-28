@@ -92,8 +92,14 @@ public class TokenProvider {
             userId = Long.parseLong(claims.get(USER_ID).toString());
         }
 
+        String userType = null;
+        if (claims.get(USER_TYPE) != null) {
+            userType = claims.get(USER_TYPE).toString();
+        }
+
         AuthenticatedUser principal = new AuthenticatedUser(claims.getSubject(), "", authorities);
         principal.setUserId(userId);
+        principal.setUserType(userType);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }

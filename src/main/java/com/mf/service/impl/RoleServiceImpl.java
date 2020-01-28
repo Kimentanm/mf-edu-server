@@ -3,6 +3,7 @@ package com.mf.service.impl;
 import com.mf.core.AbstractService;
 import com.mf.dao.RoleMapper;
 import com.mf.model.Role;
+import com.mf.model.RolePermissionRef;
 import com.mf.service.RolePermissionRefService;
 import com.mf.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +57,16 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
             db.setDescription(role.getDescription());
         }
         updateByPKSelective(role);
+        //软删除角色和权限的关联关系
+        RolePermissionRef ref = new RolePermissionRef();
+        ref.setRoleId(db.getId());
+        List<RolePermissionRef> rolePermissionRefs = rolePermissionRefService.find(ref);
+        rolePermissionRefs.forEach(rolePermissionRef -> {
+            rolePermissionRef.setIsDelete(true);
+            rolePermissionRefService.updateByPKSelective(rolePermissionRef);
+        });
         if (null != role.getPermissionIds() && role.getPermissionIds().size() > 0) {
+            //保存新的关联关系
             rolePermissionRefService.saveRolePermission(role.getId(), role.getPermissionIds());
         }
     }

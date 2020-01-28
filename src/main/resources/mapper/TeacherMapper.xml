@@ -32,6 +32,7 @@
             <if test="userName != null">
                 AND user_name like concat('%',#{userName},'%')
             </if>
+            AND is_delete = 0
         </where>
     </select>
 </mapper>

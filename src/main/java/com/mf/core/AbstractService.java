@@ -160,8 +160,21 @@ public abstract class AbstractService<T> implements Service<T> {
     }
 
     public T findOne(T entity) {
+        Object isDelete = Reflections.invokeGetter(entity, field_name_is_delete);
+        if (isDelete == null) {
+            Reflections.invokeSetter(entity, field_name_is_delete, false);
+        }
         T result = mapper.selectOne(entity);
         return result;
+    }
+
+    public void deleteById(Long id){
+        T db = findById(id);
+        if (null == db){
+            throw new ServiceException(ResultCode.ENTITYNOTFOUND);
+        }
+        Reflections.invokeSetter(db,field_name_is_delete,true);
+        mapper.updateByPrimaryKeySelective(db);
     }
 
     @Override
@@ -172,32 +185,29 @@ public abstract class AbstractService<T> implements Service<T> {
 
     @Override
     public List<T> find(T entity) {
+        Object isDelete = Reflections.invokeGetter(entity, field_name_is_delete);
+        if (isDelete == null) {
+            Reflections.invokeSetter(entity, field_name_is_delete, false);
+        }
         List<T> result = mapper.select(entity);
         return result;
     }
-
-//    @Override
-//    public T findBy(String fieldName, Object value) throws TooManyResultsException {
-//        try {
-//            T model = modelClass.newInstance();
-//            Field field = modelClass.getDeclaredField(fieldName);
-//            field.setAccessible(true);
-//            field.set(model, value);
-//            return mapper.selectOne(model);
-//        } catch (ReflectiveOperationException e) {
-//            throw new ServiceException(e.getMessage(), e);
-//        }
-//    }
-
-//    public List<T> findByIds(String ids) {
-//        return mapper.selectByIds(ids);
-//    }
 
     public List<T> findByCondition(Condition condition) {
         return mapper.selectByCondition(condition);
     }
 
     public List<T> findAll() {
-        return mapper.selectAll();
+        Class<T> clz = (Class)(((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
+        T model = null;
+        try {
+            model = clz.newInstance();
+            Reflections.invokeSetter(model, field_name_is_delete, false);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return mapper.select(model);
     }
 }

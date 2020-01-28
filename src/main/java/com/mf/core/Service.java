@@ -16,4 +16,5 @@ public interface  Service<T> {
     int count(T entity);
     T findOne(T entity);
     List<T> find(T entity);
+    void deleteById(Long id);
 }

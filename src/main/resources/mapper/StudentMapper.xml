@@ -6,8 +6,8 @@
           WARNING - @mbg.generated
         -->
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
-        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createdDate"/>
         <result column="last_modified_by" jdbcType="BIGINT" property="lastModifiedBy"/>
         <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate"/>
         <result column="is_delete" jdbcType="BIT" property="isDelete"/>
@@ -22,5 +22,6 @@
         <result column="class_id" jdbcType="BIGINT" property="classId"/>
         <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="signature" jdbcType="VARCHAR" property="signature"/>
     </resultMap>
 </mapper>

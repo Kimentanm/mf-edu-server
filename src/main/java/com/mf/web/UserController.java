@@ -6,6 +6,9 @@ import com.mf.core.Result;
 import com.mf.core.ResultCode;
 import com.mf.core.ResultGenerator;
 import com.mf.dto.FileResultDTO;
+import com.mf.dto.LoginDTO;
+import com.mf.model.Student;
+import com.mf.model.Teacher;
 import com.mf.model.User;
 import com.mf.security.SecurityUtils;
 import com.mf.service.UserService;
@@ -26,9 +29,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @Resource
-    private QiniuyunServiceManager qm;
-
     /**
      * 新增用户
      * @param user
@@ -47,7 +47,7 @@ public class UserController {
      */
     @DeleteMapping("/deleteUser/{id}")
     public Result deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+        userService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -108,22 +108,10 @@ public class UserController {
      * @param response
      * @return
      */
-    @PostMapping("/file/upload")
-    public Result uploadFile(HttpServletRequest request, HttpServletResponse response){
-        try {
-            MultipartHttpServletRequest mr = (MultipartHttpServletRequest) request;
-            Iterator<String> iter = mr.getFileNames();
-            while (iter.hasNext()) {
-                String next = iter.next();
-                String fileName = mr.getFile(next).getOriginalFilename();
-                FileResultDTO result = qm.uploadInputStream(mr.getFile(fileName).getBytes(), fileName);
-                userService.updateImageUrl(result.getLocation());
-                return ResultGenerator.genSuccessResult(result);
-            }
-            return ResultGenerator.genFailResult(">>>file upload failed");
-        } catch (Exception e) {
-            return ResultGenerator.genFailResult(">>>file upload failed");
-        }
+    @PostMapping("/avatar/upload")
+    public Result uploadUserAvatar(HttpServletRequest request, HttpServletResponse response){
+        userService.uploadUserAvatar(request, response);
+        return ResultGenerator.genSuccessResult();
     }
 
     /**
@@ -132,7 +120,7 @@ public class UserController {
      * @return
      */
     @PutMapping("/password")
-    public Result updatePassword(@RequestBody User user) {
+    public Result updatePassword(@RequestBody LoginDTO user) {
         userService.updatePassword(user);
         return ResultGenerator.genSuccessResult();
     }
