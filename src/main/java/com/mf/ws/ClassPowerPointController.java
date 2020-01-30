@@ -43,4 +43,9 @@ public class ClassPowerPointController {
     public void handleSendPaletteICE(MessageBO messageBO) {
         messagingTemplate.convertAndSend("/topic/sendPaletteICE/" + messageBO.getReceiver(), messageBO);
     }
+
+    @MessageMapping("/controlStudentPalette")
+    public void controlStudentPalette(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/controlStudentPalette/" + messageBO.getReceiver(), messageBO);
+    }
 }
