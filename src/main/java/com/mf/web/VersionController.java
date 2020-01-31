@@ -74,7 +74,7 @@ public class VersionController {
     /**
      * 获取最新的版本信息
      */
-    @GetMapping("/last")
+    @PostMapping("/last")
     public Result getLastVersionInfo(@RequestParam("type") String type) {
         Version version = versionService.getLastVersionInfo(type);
         return ResultGenerator.genSuccessResult(version);
