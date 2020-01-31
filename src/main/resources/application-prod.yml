@@ -15,5 +15,5 @@ server:
 qiniuyun:
   ak: T5XQB_CwNFrIdhVvTClo66SdRdUhGPIt6K2iFE4Y
   sk: kJKqehmTegWIXZrR9AkZ2agrV38zZJ1wQypEYwue
-  bucket: mf-edu
+  bucket: mf-edu-prod
   outline: http://mf-prod.kimen.com.cn/
