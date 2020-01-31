@@ -44,6 +44,8 @@ public class ClassRoom extends BaseModel {
     @Column(name = "close_time")
     private LocalDateTime closeTime;
 
+    private String type;
+
     @Transient
     private Teacher teacher;
 
