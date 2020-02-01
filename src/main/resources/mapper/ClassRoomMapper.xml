@@ -23,6 +23,7 @@
         <result column="pre_close_time" jdbcType="TIMESTAMP" property="preCloseTime"/>
         <result column="open_time" jdbcType="TIMESTAMP" property="openTime"/>
         <result column="close_time" jdbcType="TIMESTAMP" property="closeTime"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
         <association property="teacher" javaType="com.mf.model.Teacher">
             <result column="t_user_name" jdbcType="VARCHAR" property="userName"/>
             <result column="t_real_name" jdbcType="VARCHAR" property="realName"/>

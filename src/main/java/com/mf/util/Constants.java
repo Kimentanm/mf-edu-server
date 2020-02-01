@@ -31,4 +31,10 @@ public interface Constants {
         String PUBLIC = "PUBLIC";
         String PRIVATE = "PRIVATE";
     }
+
+    interface ClassroomType{
+        String SINGLE = "SINGLE";
+        String MULTIPLE = "MULTIPLE";
+    }
+
 }
