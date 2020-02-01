@@ -3,6 +3,7 @@ package com.mf.model;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.*;
 
 @Data
@@ -44,6 +45,9 @@ public class ClassRoom extends BaseModel {
     @Column(name = "close_time")
     private LocalDateTime closeTime;
 
+    /**
+     * 教室类型（一对一教室/开放教室）
+     * */
     private String type;
 
     @Transient
@@ -51,4 +55,10 @@ public class ClassRoom extends BaseModel {
 
     @Transient
     private Student student;
+
+    /**
+     * 开放教室对应的多个学生id
+     * */
+    @Transient
+    private List<Long> studentIds;
 }

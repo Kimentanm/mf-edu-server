@@ -16,5 +16,10 @@ public interface ClassRoomService extends Service<ClassRoom> {
 
     List<ClassRoom> findAllAndTeacherStudent();
 
+    /**
+     * 保存教室学生一对多关系
+     */
+    Long saveClassroomStudentRef(ClassRoom classRoom);
+
     void delete(Long id);
 }
