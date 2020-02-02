@@ -8,6 +8,7 @@ import com.mf.service.ClassRoomService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mf.service.ClassroomStudentRefService;
+import com.mf.util.Constants;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -29,6 +30,7 @@ public class ClassRoomController {
 
     @PostMapping
     public Result add(@Validated @RequestBody ClassRoom classRoom) {
+        classRoom.setType(Constants.ClassroomType.SINGLE);
         classRoomService.save(classRoom);
         return ResultGenerator.genSuccessResult();
     }
