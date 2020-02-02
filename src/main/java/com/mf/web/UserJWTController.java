@@ -72,7 +72,7 @@ public class UserJWTController {
             //将token缓存到redis中
             String key = loginDTO.getUsername();
             String value = jwt;
-            redisTemplate.opsForValue().set(key, value);
+//            redisTemplate.opsForValue().set(key, value);
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResultGenerator.genSuccessResult(jwt);
         } catch (AuthenticationException ae) {
