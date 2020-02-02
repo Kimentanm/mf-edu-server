@@ -46,7 +46,7 @@ public class ClassRoom extends BaseModel {
     private LocalDateTime closeTime;
 
     /**
-     * 教室类型（一对一教室/开放教室）
+     * 教室类型（一对一/小班）
      * */
     private String type;
 
@@ -57,7 +57,7 @@ public class ClassRoom extends BaseModel {
     private Student student;
 
     /**
-     * 开放教室对应的多个学生id
+     * 小班对应的多个学生id
      * */
     @Transient
     private List<Long> studentIds;
