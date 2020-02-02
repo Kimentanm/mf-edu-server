@@ -7,6 +7,7 @@ import com.mf.security.SecurityUtils;
 import com.mf.service.ClassRoomService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mf.service.ClassroomStudentRefService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,9 +24,21 @@ public class ClassRoomController {
     @Resource
     private ClassRoomService classRoomService;
 
+    @Resource
+    private ClassroomStudentRefService classroomStudentRefService;
+
     @PostMapping
     public Result add(@Validated @RequestBody ClassRoom classRoom) {
         classRoomService.save(classRoom);
+        return ResultGenerator.genSuccessResult();
+    }
+
+    /**
+     * 保存教室和学生一对多关系
+     */
+    @PostMapping("/multiple")
+    public Result addMultiple(@Validated @RequestBody ClassRoom classRoom) {
+        classRoomService.saveClassroomStudentRef(classRoom);
         return ResultGenerator.genSuccessResult();
     }
 

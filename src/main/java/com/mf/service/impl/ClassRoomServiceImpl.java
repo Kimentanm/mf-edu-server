@@ -5,6 +5,7 @@ import com.mf.dao.ClassRoomMapper;
 import com.mf.model.ClassRoom;
 import com.mf.core.AbstractService;
 import com.mf.service.ClassRoomService;
+import com.mf.service.ClassroomStudentRefService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ public class ClassRoomServiceImpl extends AbstractService<ClassRoom> implements 
     @Resource
     private ClassRoomMapper tblClassRoomMapper;
 
+    @Resource
+    private ClassroomStudentRefService classroomStudentRefService;
+
     @Override
     public List<ClassRoom> listByTeacherId(Long teacherId) {
         return tblClassRoomMapper.listByTeacherId(teacherId);
@@ -33,6 +37,18 @@ public class ClassRoomServiceImpl extends AbstractService<ClassRoom> implements 
     @Override
     public List<ClassRoom> findAllAndTeacherStudent() {
         return tblClassRoomMapper.findAllAndTeacherStudent();
+    }
+
+    /**
+     * 保存教室学生一对多关系
+     */
+    @Override
+    public Long saveClassroomStudentRef(ClassRoom classRoom) {
+        Long result = super.save(classRoom);
+        if (null != classRoom.getStudentIds() && classRoom.getStudentIds().size() > 0) {
+            classroomStudentRefService.saveClassroomStudentRef(result, classRoom.getStudentIds());
+        }
+        return result;
     }
 
     @Override

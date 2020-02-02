@@ -9,6 +9,8 @@ import com.mf.service.UserService;
 import com.mf.dto.LoginDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -30,6 +33,12 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping()
 public class UserJWTController {
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Resource
+    private RedisTemplate redisTemplate;
 
     private final Logger log = LoggerFactory.getLogger(UserJWTController.class);
 
@@ -60,6 +69,10 @@ public class UserJWTController {
             Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = tokenProvider.createToken(authentication, false, loginDTO.getType());
+            //将token缓存到redis中
+            String key = loginDTO.getUsername();
+            String value = jwt;
+            redisTemplate.opsForValue().set(key, value);
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResultGenerator.genSuccessResult(jwt);
         } catch (AuthenticationException ae) {
