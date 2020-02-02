@@ -36,9 +36,9 @@ public class ClassRoomController {
     /**
      * 保存教室和学生一对多关系
      */
-    @PostMapping
+    @PostMapping("/multiple")
     public Result addMultiple(@Validated @RequestBody ClassRoom classRoom) {
-        classroomStudentRefService.add(classRoom);
+        classRoomService.saveClassroomStudentRef(classRoom);
         return ResultGenerator.genSuccessResult();
     }
 
