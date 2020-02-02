@@ -6,6 +6,7 @@ import com.mf.model.ClassRoom;
 import com.mf.core.AbstractService;
 import com.mf.service.ClassRoomService;
 import com.mf.service.ClassroomStudentRefService;
+import com.mf.util.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +45,8 @@ public class ClassRoomServiceImpl extends AbstractService<ClassRoom> implements 
      */
     @Override
     public Long saveClassroomStudentRef(ClassRoom classRoom) {
+        //将教室标记为大教室
+        classRoom.setType(Constants.ClassroomType.MULTIPLE);
         Long result = super.save(classRoom);
         if (null != classRoom.getStudentIds() && classRoom.getStudentIds().size() > 0) {
             classroomStudentRefService.saveClassroomStudentRef(result, classRoom.getStudentIds());
