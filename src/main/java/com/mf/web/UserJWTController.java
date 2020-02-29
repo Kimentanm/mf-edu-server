@@ -69,10 +69,14 @@ public class UserJWTController {
             Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = tokenProvider.createToken(authentication, false, loginDTO.getType());
-            //将token缓存到redis中
-            String key = loginDTO.getUsername();
-            String value = jwt;
-            redisTemplate.opsForValue().set(key, value);
+
+            String key = loginDTO.getType() + loginDTO.getId();
+            if (null != redisTemplate.opsForValue().get(key)) {
+                redisTemplate.delete(key);
+            } else {
+                redisTemplate.opsForValue().set(key, jwt);
+            }
+
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResultGenerator.genSuccessResult(jwt);
         } catch (AuthenticationException ae) {

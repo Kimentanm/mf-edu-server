@@ -6,6 +6,7 @@ import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +36,9 @@ public class TokenProvider {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
 
     @PostConstruct
@@ -112,6 +116,10 @@ public class TokenProvider {
 //                userId = Long.parseLong(claims.get(USER_ID).toString());
                 return true;
             }
+            String redisKey = claims.get(USER_TYPE).toString() + claims.get(USER_ID).toString();
+            if (null == redisTemplate.opsForValue().get(redisKey)) {
+                return false;
+            }
 
             //TODO 逻辑上登录过的用户不应该找不到，暂时注释
 //            User user = userService.findById(userId);
@@ -136,4 +144,6 @@ public class TokenProvider {
         }
         return false;
     }
+
+
 }
