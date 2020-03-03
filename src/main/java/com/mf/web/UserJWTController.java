@@ -70,9 +70,13 @@ public class UserJWTController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = tokenProvider.createToken(authentication, false, loginDTO.getType());
 
+            /**
+             * 判断redis中是否存在登录用户的token，如果存在就将已存在的删除并将新的token保存进redis
+             * */
             String key = loginDTO.getType() + loginDTO.getId();
             if (null != redisTemplate.opsForValue().get(key)) {
                 redisTemplate.delete(key);
+                redisTemplate.opsForValue().set(key,jwt);
             } else {
                 redisTemplate.opsForValue().set(key, jwt);
             }

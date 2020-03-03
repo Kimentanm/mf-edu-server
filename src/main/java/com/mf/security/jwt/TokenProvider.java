@@ -116,8 +116,11 @@ public class TokenProvider {
 //                userId = Long.parseLong(claims.get(USER_ID).toString());
                 return true;
             }
+            /**
+             * 判断redis中是否存在该用户的token，如果存在就放行，不存在就返回false
+             * */
             String redisKey = claims.get(USER_TYPE).toString() + claims.get(USER_ID).toString();
-            if (null == redisTemplate.opsForValue().get(redisKey)) {
+            if (authToken != redisTemplate.opsForValue().get(redisKey)) {
                 return false;
             }
 
