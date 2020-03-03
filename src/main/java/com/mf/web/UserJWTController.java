@@ -77,7 +77,7 @@ public class UserJWTController {
                 userId = authenticatedUser.getUserId();
             }
             // 判断redis中是否存在登录用户的token，如果存在就将已存在的删除并将新的token保存进redis
-            String key = loginDTO.getType() + userId;
+            String key = loginDTO.getType() + "-" + userId;
             if (null != redisTemplate.opsForValue().get(key)) {
                 redisTemplate.delete(key);
                 redisTemplate.opsForValue().set(key, jwt);

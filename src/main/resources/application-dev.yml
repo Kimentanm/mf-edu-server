@@ -8,6 +8,9 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 1000MB
+  redis:
+    host: 127.0.0.1
+    port: 6379
 server:
   port: 8082
   context-path: /mf-edu
@@ -17,7 +20,3 @@ qiniuyun:
   sk: kJKqehmTegWIXZrR9AkZ2agrV38zZJ1wQypEYwue
   bucket: mf-edu
   outline: http://img.kimen.com.cn/
-
-redis:
-  host: 127.0.0.1
-  port: 6379

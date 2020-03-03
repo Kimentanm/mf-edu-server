@@ -111,23 +111,12 @@ public class TokenProvider {
     public boolean validateToken(String authToken) {
         try {
             Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken).getBody();
-            Long userId = null;
             if (claims.get(USER_ID) != null) {
-//                userId = Long.parseLong(claims.get(USER_ID).toString());
                 // 判断redis中是否存在该用户的token，如果存在就放行，不存在就返回false
-                String redisKey = claims.get(USER_TYPE).toString() + claims.get(USER_ID).toString();
-                if (authToken != redisTemplate.opsForValue().get(redisKey)) {
-                    return false;
-                }
-                return true;
+                String redisKey = claims.get(USER_TYPE).toString() + "-" + claims.get(USER_ID).toString();
+                String redisToken = (String) redisTemplate.opsForValue().get(redisKey);
+                return authToken.equals(redisToken);
             }
-
-
-            //TODO 逻辑上登录过的用户不应该找不到，暂时注释
-//            User user = userService.findById(userId);
-//            if(user != null){
-//                return true;
-//            }
         } catch (SignatureException e) {
             log.info("Invalid JWT signature.");
             log.trace("Invalid JWT signature trace: {}", e);
