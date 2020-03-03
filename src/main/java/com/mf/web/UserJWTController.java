@@ -3,6 +3,7 @@ package com.mf.web;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mf.core.Result;
 import com.mf.core.ResultGenerator;
+import com.mf.security.AuthenticatedUser;
 import com.mf.security.jwt.JWTConfigurer;
 import com.mf.security.jwt.TokenProvider;
 import com.mf.service.UserService;
@@ -70,13 +71,16 @@ public class UserJWTController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = tokenProvider.createToken(authentication, false, loginDTO.getType());
 
-            /**
-             * 判断redis中是否存在登录用户的token，如果存在就将已存在的删除并将新的token保存进redis
-             * */
-            String key = loginDTO.getType() + loginDTO.getId();
+            Long userId = null;
+            if (authentication.getPrincipal() instanceof AuthenticatedUser) {
+                AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
+                userId = authenticatedUser.getUserId();
+            }
+            // 判断redis中是否存在登录用户的token，如果存在就将已存在的删除并将新的token保存进redis
+            String key = loginDTO.getType() + userId;
             if (null != redisTemplate.opsForValue().get(key)) {
                 redisTemplate.delete(key);
-                redisTemplate.opsForValue().set(key,jwt);
+                redisTemplate.opsForValue().set(key, jwt);
             } else {
                 redisTemplate.opsForValue().set(key, jwt);
             }
