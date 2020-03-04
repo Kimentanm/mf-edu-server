@@ -48,4 +48,9 @@ public class ClassPowerPointController {
     public void controlStudentPalette(MessageBO messageBO) {
         messagingTemplate.convertAndSend("/topic/controlStudentPalette/" + messageBO.getReceiver(), messageBO);
     }
+
+    @MessageMapping("/playAndPause")
+    public void playAndPause(MessageBO messageBO) {
+        messagingTemplate.convertAndSend("/topic/playAndPause/" + messageBO.getReceiver(), messageBO);
+    }
 }

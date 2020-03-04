@@ -112,10 +112,7 @@ public class TokenProvider {
         try {
             Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken).getBody();
             if (claims.get(USER_ID) != null) {
-                // 判断redis中是否存在该用户的token，如果存在就放行，不存在就返回false
-                String redisKey = claims.get(USER_TYPE).toString() + "-" + claims.get(USER_ID).toString();
-                String redisToken = (String) redisTemplate.opsForValue().get(redisKey);
-                return authToken.equals(redisToken);
+                return true;
             }
         } catch (SignatureException e) {
             log.info("Invalid JWT signature.");
@@ -137,4 +134,11 @@ public class TokenProvider {
     }
 
 
+    public boolean validateTokenInvalid(String authToken) {
+        // 判断redis中是否存在该用户的token，如果存在就放行，不存在就返回false
+        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken).getBody();
+        String redisKey = claims.get(USER_TYPE).toString() + "-" + claims.get(USER_ID).toString();
+        String redisToken = (String) redisTemplate.opsForValue().get(redisKey);
+        return authToken.equals(redisToken);
+    }
 }

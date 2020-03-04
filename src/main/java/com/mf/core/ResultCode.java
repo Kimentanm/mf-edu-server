@@ -59,6 +59,7 @@ public enum ResultCode {
 
 
     VALIDATE_TOKEN_FAILED(999, "登录信息已失效"), //账号不存在， 或者token失效等
+    VALIDATE_TOKEN_INVALID(998, "当前账号已在其他地方登录，请尽快修改密码"),
 
     ;
     private Integer code;

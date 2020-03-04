@@ -26,8 +26,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-//import com.yg.service.SmsVerifyService;
-
 /**
  * Controller to authenticate users.
  */
@@ -84,7 +82,6 @@ public class UserJWTController {
             } else {
                 redisTemplate.opsForValue().set(key, jwt);
             }
-
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResultGenerator.genSuccessResult(jwt);
         } catch (AuthenticationException ae) {
