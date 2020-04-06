@@ -7,10 +7,13 @@ import com.mf.service.CoursewareService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mf.util.Constants;
+import org.jodconverter.DocumentConverter;
+import org.jodconverter.office.OfficeException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -22,6 +25,9 @@ public class CoursewareController {
 
     @Resource
     private CoursewareService coursewareService;
+
+    @Resource
+    private DocumentConverter documentConverter;
 
     /**
      * 新增课件
@@ -74,5 +80,16 @@ public class CoursewareController {
     public Result getAllPublic() {
         List<Courseware> coursewareList = coursewareService.findByType(Constants.CoursewareType.PUBLIC);
         return ResultGenerator.genSuccessResult(coursewareList);
+    }
+
+    @GetMapping("/word2pdf")
+    public void getPdf() {
+        File word = new File("E:\\2020年阿基米德绩效管理启动说明2020.02.21.docx");
+        File pdf = new File("E:\\2020年阿基米德绩效管理启动说明2020.02.21.pdf");
+        try {
+            documentConverter.convert(word).to(pdf).execute();
+        } catch (OfficeException e) {
+            e.printStackTrace();
+        }
     }
 }

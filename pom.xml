@@ -21,11 +21,32 @@
         <version>1.5.7.RELEASE</version>
     </parent>
 
+    <profiles>
+        <profile>
+            <!-- windows环境 -->
+            <id>win</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <pom.office.home>C:/Program Files/LibreOffice</pom.office.home>
+            </properties>
+        </profile>
+        <profile>
+            <!-- linux环境 -->
+            <id>linux</id>
+            <properties>
+                <pom.office.home>/opt/libreoffice6.0</pom.office.home>
+            </properties>
+        </profile>
+    </profiles>
+
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
 
@@ -284,6 +305,28 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+        </dependency>
+
+        <!-- word转pdf -->
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-local</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jodconverter</groupId>
+            <artifactId>jodconverter-spring-boot-starter</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.libreoffice</groupId>
+            <artifactId>ridl</artifactId>
+            <version>5.4.2</version>
         </dependency>
 
     </dependencies>
