@@ -1,8 +1,10 @@
 package com.mf.service;
 
 import com.mf.core.Service;
+import com.mf.dto.FileResultDTO;
 import com.mf.model.Courseware;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -11,4 +13,6 @@ import java.util.List;
 public interface CoursewareService extends Service<Courseware> {
 
     List<Courseware> findByType(String type);
+
+    List<FileResultDTO> uploadCourseware(HttpServletRequest request);
 }

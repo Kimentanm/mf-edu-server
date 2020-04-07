@@ -87,4 +87,10 @@ public class CoursewareController {
         List<FileResultDTO> result = commonService.uploadCourse(request);
         AsposeWordsUtils.doc2pdf("D:\\files\\2020年阿基米德绩效管理启动说明2020.02.21.docx", "D:\\files\\2020年阿基米德绩效管理启动说明2020.02.21.pdf");
     }
+
+    @PostMapping("/upload")
+    public Result uploadFile(HttpServletRequest request){
+        List<FileResultDTO> result = coursewareService.uploadCourseware(request);
+        return ResultGenerator.genSuccessResult(result);
+    }
 }

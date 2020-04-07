@@ -21,26 +21,6 @@
         <version>1.5.7.RELEASE</version>
     </parent>
 
-    <profiles>
-        <profile>
-            <!-- windows环境 -->
-            <id>win</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <pom.office.home>C:/Program Files/LibreOffice</pom.office.home>
-            </properties>
-        </profile>
-        <profile>
-            <!-- linux环境 -->
-            <id>linux</id>
-            <properties>
-                <pom.office.home>/opt/libreoffice6.0</pom.office.home>
-            </properties>
-        </profile>
-    </profiles>
-
 
     <dependencies>
         <dependency>
@@ -307,16 +287,14 @@
             <artifactId>jedis</artifactId>
         </dependency>
 
+        <!--word转pdf-->
         <dependency>
-            <groupId>com.aspose</groupId>
+            <groupId>com.aspose.words</groupId>
             <artifactId>aspose-words</artifactId>
-            <version>18.8</version>
+            <classifier>jdk16</classifier>
+            <version>15.8.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.aspose</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.1</version>
-        </dependency>
+
     </dependencies>
 
     <build>
@@ -338,25 +316,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>aliyun-repos</id>
-            <url>http://maven.aliyun.com/nexus/news/groups/public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>aliyun-plugin</id>
-            <url>http://maven.aliyun.com/nexus/news/groups/public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
