@@ -294,7 +294,6 @@
             <classifier>jdk16</classifier>
             <version>15.8.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
