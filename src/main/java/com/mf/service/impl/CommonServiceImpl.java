@@ -3,6 +3,7 @@ package com.mf.service.impl;
 import com.mf.core.ResultGenerator;
 import com.mf.dto.FileResultDTO;
 import com.mf.service.CommonService;
+import com.mf.util.AsposeWordsUtils;
 import com.mf.util.QiniuyunServiceManager;
 import com.mf.web.CommonController;
 import org.slf4j.Logger;
@@ -41,7 +42,30 @@ public class CommonServiceImpl implements CommonService {
             }
             return resultList;
         } catch (Exception e) {
+            //见64行注解
             log.error(">>> file upload faile", e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<FileResultDTO> uploadCourse(HttpServletRequest request) {
+        try {
+            List<FileResultDTO> resultDTOS = new ArrayList<>();
+            MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
+            Iterator<String> iterator = mRequest.getFileNames();
+            while (iterator.hasNext()) {
+                String next = iterator.next();
+                String fileName = mRequest.getFile(next).getOriginalFilename();
+                if (mRequest.getContentType().equalsIgnoreCase("application/msword")
+                        || mRequest.getContentType().equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+//                    AsposeWordsUtils.doc2pdf();
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            //“失败”的正确写法是alfred的“fail”，请Kimen下次注意！
+            log.error(">>> file upload fail", e);
             return null;
         }
     }
