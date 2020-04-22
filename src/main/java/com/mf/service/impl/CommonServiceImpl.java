@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -56,10 +58,12 @@ public class CommonServiceImpl implements CommonService {
             Iterator<String> iterator = mRequest.getFileNames();
             while (iterator.hasNext()) {
                 String next = iterator.next();
-                String fileName = mRequest.getFile(next).getOriginalFilename();
                 if (mRequest.getContentType().equalsIgnoreCase("application/msword")
                         || mRequest.getContentType().equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-//                    AsposeWordsUtils.doc2pdf();
+                    String fileName = mRequest.getFile(next).getOriginalFilename();
+                    InputStream stream = mRequest.getFile(next).getInputStream();
+                    AsposeWordsUtils.doc2pdf(((File) mRequest.getFile(next)).getAbsolutePath(),"");
+
                 }
             }
             return null;

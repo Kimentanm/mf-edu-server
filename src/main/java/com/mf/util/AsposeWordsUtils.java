@@ -51,4 +51,22 @@ public class AsposeWordsUtils {
             e.printStackTrace();
         }
     }
+
+//    public static void doc2pdf1(File sourceFile, OutputStream targetFile) {
+//        if (!getLicense()) {// 验证License 若不验证则转化出的pdf文档会有水印产生
+//            return;
+//        }
+//        try {
+//            long old = System.currentTimeMillis();
+////            File file = new File(targetFile);
+//            FileOutputStream os = new FileOutputStream(sourceFile);
+//            Document doc = new Document(sourceFile.getAbsolutePath());                    //sourcerFile是将要被转化的word文档
+//            doc.save(os, SaveFormat.PDF);//全面支持DOC, DOCX, OOXML, RTF HTML, OpenDocument, PDF, EPUB, XPS, SWF 相互转换
+//            os.close();
+//            long now = System.currentTimeMillis();
+//            System.out.println("共耗时：" + ((now - old) / 1000.0) + "秒");  //转化用时
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
