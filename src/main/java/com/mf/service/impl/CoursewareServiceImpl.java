@@ -79,9 +79,9 @@ public class CoursewareServiceImpl extends AbstractService<Courseware> implement
                     ByteArrayOutputStream os = new ByteArrayOutputStream();
                     PdfUtil.doc2pdf(docInputStream, os);
                     courseBytes = os.toByteArray();
-                    int length = 3;
+                    int length = 4;
                     if (fileName.endsWith(".docx")) {
-                        length = 4;
+                        length = 5;
                     }
                     fileName = fileName.substring(0, fileName.length() - length) + ".pdf";
                 }
