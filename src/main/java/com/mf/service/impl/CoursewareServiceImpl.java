@@ -79,11 +79,7 @@ public class CoursewareServiceImpl extends AbstractService<Courseware> implement
                     ByteArrayOutputStream os = new ByteArrayOutputStream();
                     PdfUtil.doc2pdf(docInputStream, os);
                     courseBytes = os.toByteArray();
-                    int length = 4;
-                    if (fileName.endsWith(".docx")) {
-                        length = 5;
-                    }
-                    fileName = fileName.substring(0, fileName.length() - length) + ".pdf";
+                    fileName = fileName.replace(fileName.endsWith(".docx") ? ".docx" : ".doc", ".pdf");
                 }
                 FileResultDTO result = qiniuyunManager.uploadInputStream(courseBytes, fileName);
                 resultList.add(result);
