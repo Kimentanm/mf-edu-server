@@ -8,7 +8,6 @@ import com.mf.service.CommonService;
 import com.mf.service.CoursewareService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mf.util.AsposeWordsUtils;
 import com.mf.util.Constants;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -80,12 +79,6 @@ public class CoursewareController {
     public Result getAllPublic() {
         List<Courseware> coursewareList = coursewareService.findByType(Constants.CoursewareType.PUBLIC);
         return ResultGenerator.genSuccessResult(coursewareList);
-    }
-
-    @GetMapping("/word2pdf")
-    public void getPdf(HttpServletRequest request) {
-        List<FileResultDTO> result = commonService.uploadCourse(request);
-        AsposeWordsUtils.doc2pdf("D:\\files\\2020年阿基米德绩效管理启动说明2020.02.21.docx", "D:\\files\\2020年阿基米德绩效管理启动说明2020.02.21.pdf");
     }
 
     @PostMapping("/upload")

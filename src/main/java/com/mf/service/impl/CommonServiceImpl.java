@@ -1,22 +1,16 @@
 package com.mf.service.impl;
 
-import com.mf.core.ResultGenerator;
 import com.mf.dto.FileResultDTO;
 import com.mf.service.CommonService;
-import com.mf.util.AsposeWordsUtils;
 import com.mf.util.QiniuyunServiceManager;
-import com.mf.web.CommonController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,32 +38,7 @@ public class CommonServiceImpl implements CommonService {
             }
             return resultList;
         } catch (Exception e) {
-            //见64行注解
             log.error(">>> file upload faile", e);
-            return null;
-        }
-    }
-
-    @Override
-    public List<FileResultDTO> uploadCourse(HttpServletRequest request) {
-        try {
-            List<FileResultDTO> resultDTOS = new ArrayList<>();
-            MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
-            Iterator<String> iterator = mRequest.getFileNames();
-            while (iterator.hasNext()) {
-                String next = iterator.next();
-                if (mRequest.getContentType().equalsIgnoreCase("application/msword")
-                        || mRequest.getContentType().equalsIgnoreCase("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-                    String fileName = mRequest.getFile(next).getOriginalFilename();
-                    InputStream stream = mRequest.getFile(next).getInputStream();
-                    AsposeWordsUtils.doc2pdf(((File) mRequest.getFile(next)).getAbsolutePath(),"");
-
-                }
-            }
-            return null;
-        } catch (Exception e) {
-            //“失败”的正确写法是alfred的“fail”，请Kimen下次注意！
-            log.error(">>> file upload fail", e);
             return null;
         }
     }

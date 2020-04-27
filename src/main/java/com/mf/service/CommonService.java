@@ -8,6 +8,4 @@ import java.util.List;
 public interface CommonService {
 
     List<FileResultDTO> uploadFile(HttpServletRequest request);
-
-    List<FileResultDTO> uploadCourse(HttpServletRequest request);
 }
