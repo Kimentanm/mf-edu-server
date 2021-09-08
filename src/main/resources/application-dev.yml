@@ -1,16 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://111.231.135.83:33307/mf-edu?useUnicode=true&useSSL=false&characterEncoding=utf-8&allowMultiQueries=true
-    username: kimen
-    password: mys@l@kimen
+    url: jdbc:mysql://home-linux:33306/mf-edu?useUnicode=true&useSSL=false&characterEncoding=utf-8&allowMultiQueries=true
+    username: mf
+    password: eXBQ7uv98sivbZ
     driver-class-name: com.mysql.jdbc.Driver
   http:
     multipart:
       max-file-size: 100MB
       max-request-size: 1000MB
-  redis:
-    host: 127.0.0.1
-    port: 6379
 server:
   port: 8082
   context-path: /mf-edu
@@ -20,3 +17,7 @@ qiniuyun:
   sk: kJKqehmTegWIXZrR9AkZ2agrV38zZJ1wQypEYwue
   bucket: mf-edu
   outline: http://img.kimen.com.cn/
+
+redis:
+  host: 127.0.0.1
+  port: 6379

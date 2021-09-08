@@ -26,7 +26,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
 
@@ -315,5 +314,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://nexus.kimen.com.cn/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>http://nexus.kimen.com.cn/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
