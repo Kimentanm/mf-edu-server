@@ -310,27 +310,17 @@
 
     <repositories>
         <repository>
-            <id>aliyun-repos</id>
-            <url>http://maven.aliyun.com/nexus/news/groups/public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-releases</id>
-            <url>https://repo.spring.io/libs-release</url>
+            <id>central</id>
+            <url>http://nexus.kimen.com.cn/repository/maven-public/</url>
         </repository>
     </repositories>
 
+
     <pluginRepositories>
         <pluginRepository>
-            <id>aliyun-plugin</id>
-            <url>http://maven.aliyun.com/nexus/news/groups/public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>central</id>
+            <url>http://nexus.kimen.com.cn/repository/maven-public/</url>
         </pluginRepository>
     </pluginRepositories>
-
 
 </project>
